@@ -1,181 +1,237 @@
 'use client';
 
-import { useRef } from 'react';
 import Image from 'next/image';
-import { motion, useInView } from 'framer-motion';
-import { FiDownload, FiAward, FiBriefcase, FiUsers, FiCode } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiDownload, FiCheck, FiCode, FiCoffee, FiAward } from 'react-icons/fi';
 import SectionTitle from './ui/SectionTitle';
 import Button from './ui/Button';
 
-const stats = [
-  { icon: FiBriefcase, value: 5, suffix: '+', label: 'Years Experience' },
-  { icon: FiCode, value: 50, suffix: '+', label: 'Projects Completed' },
-  { icon: FiUsers, value: 30, suffix: '+', label: 'Happy Clients' },
-  { icon: FiAward, value: 10, suffix: '+', label: 'Awards Won' },
+// Key highlights/values
+const highlights = [
+  'Clean & Maintainable Code',
+  'Modern Tech Stack',
+  'User-Centric Design',
+  'Performance Optimized',
 ];
 
-function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+// Journey milestones
+const journey = [
+  { year: '2019', title: 'Started Coding', desc: 'First line of code' },
+  { year: '2020', title: 'First Project', desc: 'Freelance work' },
+  { year: '2022', title: 'Full Stack', desc: 'Backend mastery' },
+  { year: '2024', title: 'Senior Dev', desc: 'Team leadership' },
+];
 
-  return (
-    <span ref={ref}>
-      {isInView ? (
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {value}{suffix}
-        </motion.span>
-      ) : '0'}
-    </span>
-  );
-}
+// Quick stats
+const stats = [
+  { icon: FiCode, value: '50+', label: 'Projects' },
+  { icon: FiCoffee, value: '1000+', label: 'Commits' },
+  { icon: FiAward, value: '15+', label: 'Certifications' },
+];
 
 export default function About() {
   return (
     <section id="about" className="section-padding relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark via-secondary/10 to-dark" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-dark via-primary/5 to-dark" />
       
-      {/* Grid Pattern */}
+      {/* Subtle Pattern */}
       <div className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: `linear-gradient(#C9A55A 1px, transparent 1px), linear-gradient(90deg, #C9A55A 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
+          backgroundImage: `radial-gradient(#C9A55A 1px, transparent 1px)`,
+          backgroundSize: '32px 32px',
         }}
       />
       
-      <div className="relative z-10 max-w-7xl mx-auto">
+      {/* Decorative Glows */}
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           subtitle="About Me"
           title="Know Me More"
-          description="Discover my journey, skills, and what drives me to create amazing digital experiences."
+          description="The story behind the code and the passion that drives every project."
         />
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Image */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Left Column - Image & Quick Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="lg:col-span-5"
           >
-            <div className="relative mx-auto lg:mx-0 w-full max-w-md aspect-square">
-              {/* Background Shape */}
-              <div className="absolute inset-4 bg-gradient-to-br from-primary to-accent/50 rounded-2xl transform rotate-6" />
-              
-              {/* Image Container */}
-              <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-primary/30 bg-secondary">
-                <Image
-                  src="/images/profile/Madesmac.png"
-                  alt="Madesmac"
-                  fill
-                  className="object-cover"
-                  priority
-                />
+            <div className="sticky top-24">
+              {/* Profile Image */}
+              <div className="relative mb-8">
+                <div className="relative w-full max-w-sm mx-auto aspect-[4/5] rounded-2xl overflow-hidden border border-accent/20">
+                  {/* Image */}
+                  <Image
+                    src="/images/profile/Madesmac.png"
+                    alt="Madesmac"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent" />
+                  
+                  {/* Name Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="text-2xl font-bold text-light mb-1">Madesmac</h3>
+                    <p className="text-accent font-medium">Full Stack Developer</p>
+                  </div>
+                </div>
+                
+                {/* Floating Badge */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, type: 'spring' }}
+                  className="absolute -bottom-4 -right-4 md:right-4 bg-accent text-dark px-5 py-3 rounded-xl shadow-xl"
+                >
+                  <div className="text-2xl font-bold">5+</div>
+                  <div className="text-xs font-medium opacity-80">Years Exp.</div>
+                </motion.div>
               </div>
-
-              {/* Experience Badge */}
+              
+              {/* Quick Stats Grid */}
+              <div className="grid grid-cols-3 gap-3">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 * index }}
+                    className="p-4 rounded-xl bg-secondary/50 border border-accent/10 text-center hover:border-accent/30 transition-colors"
+                  >
+                    <stat.icon className="w-5 h-5 text-accent mx-auto mb-2" />
+                    <div className="text-xl font-bold text-light">{stat.value}</div>
+                    <div className="text-xs text-gray">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+              
+              {/* Philosophy Quote */}
               <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.5, type: 'spring' }}
-                className="absolute -bottom-6 -right-6 bg-accent text-dark p-4 rounded-2xl shadow-xl"
+                transition={{ delay: 0.4 }}
+                className="p-5 rounded-xl bg-accent/5 border-l-4 border-accent"
               >
-                <div className="text-3xl font-bold font-heading">5+</div>
-                <div className="text-sm font-medium">Years of Experience</div>
+                <p className="text-light/90 text-sm italic leading-relaxed">
+                  &quot;Code is poetry. Every function tells a story, every algorithm solves a puzzle, 
+                  and every pixel creates an experience.&quot;
+                </p>
+                <p className="text-accent text-xs mt-3 font-medium">— My Development Philosophy</p>
               </motion.div>
             </div>
           </motion.div>
 
-          {/* Right - Content */}
+          {/* Right Column - Content */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="lg:col-span-7 space-y-8"
           >
+            {/* Introduction */}
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold font-heading">
-                I&apos;m <span className="gradient-text">Madesmac</span>, a Full Stack Developer
+              <h3 className="text-2xl md:text-3xl font-bold text-light">
+                Crafting Digital Experiences with
+                <span className="text-accent"> Passion & Precision</span>
               </h3>
               
               <p className="text-gray leading-relaxed">
-                With over 5 years of experience in web development, I specialize in creating 
-                responsive, user-friendly applications using modern technologies. My passion 
-                lies in turning complex problems into simple, beautiful, and intuitive designs.
+                I&apos;m Muhammad Adreansyah P. Lubis, a Full Stack Developer with over 5 years 
+                of experience building web applications that users love. I specialize in 
+                transforming complex ideas into elegant, performant solutions.
               </p>
               
               <p className="text-gray leading-relaxed">
-                I believe that great software is not just about writing code, but about 
-                understanding the user&apos;s needs and delivering solutions that exceed expectations. 
-                Every project I undertake is a new opportunity to innovate and create something meaningful.
-              </p>
-
-              <p className="text-gray leading-relaxed">
-                When I&apos;m not coding, you can find me exploring new technologies, contributing 
-                to open-source projects, or sharing knowledge through tech blogs and community events.
+                My approach combines technical expertise with creative problem-solving. 
+                I believe that great software should be intuitive, accessible, and 
+                delightful to use. Every line of code I write is aimed at creating 
+                meaningful impact.
               </p>
             </div>
-
-            {/* Info Grid */}
-            <div className="grid grid-cols-2 gap-4 py-4">
-              <div>
-                <span className="text-gray text-sm">Name:</span>
-                <p className="text-light font-medium">Muhammad Adreansyah P. Lubis</p>
-              </div>
-              <div>
-                <span className="text-gray text-sm">Email:</span>
-                <p className="text-light font-medium">adreansyahlubis@gmail.com</p>
-              </div>
-              <div>
-                <span className="text-gray text-sm">Location:</span>
-                <p className="text-light font-medium">Medan, Indonesia</p>
-              </div>
-              <div>
-                <span className="text-gray text-sm">Availability:</span>
-                <p className="text-accent font-medium">Open to Work</p>
+            
+            {/* What I Bring */}
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-accent/10">
+              <h4 className="text-lg font-semibold text-light mb-4">What I Bring to the Table</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {highlights.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-3"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                      <FiCheck className="w-3.5 h-3.5 text-accent" />
+                    </div>
+                    <span className="text-light/80 text-sm">{item}</span>
+                  </motion.div>
+                ))}
               </div>
             </div>
-
-            <Button variant="accent" icon={<FiDownload />}>
-              Download CV
-            </Button>
+            
+            {/* Journey Timeline */}
+            <div>
+              <h4 className="text-lg font-semibold text-light mb-6">My Journey</h4>
+              <div className="relative">
+                {/* Timeline Line */}
+                <div className="absolute top-0 bottom-0 left-[39px] w-px bg-gradient-to-b from-accent via-accent/50 to-transparent" />
+                
+                <div className="space-y-6">
+                  {journey.map((item, index) => (
+                    <motion.div
+                      key={item.year}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.15 }}
+                      className="flex items-start gap-6"
+                    >
+                      {/* Year Badge */}
+                      <div className="relative z-10 w-20 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                        <span className="text-accent font-bold text-sm">{item.year}</span>
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="pt-2">
+                        <h5 className="text-light font-medium">{item.title}</h5>
+                        <p className="text-gray text-sm">{item.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA */}
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Button variant="accent" icon={<FiDownload />}>
+                Download CV
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Let&apos;s Talk
+              </Button>
+            </div>
           </motion.div>
         </div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="glass-dark rounded-xl p-6 text-center hover:border-accent/30 transition-colors"
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-accent/20 text-accent mb-4">
-                <stat.icon size={24} />
-              </div>
-              <div className="text-3xl md:text-4xl font-bold font-heading text-light mb-1">
-                <Counter value={stat.value} suffix={stat.suffix} />
-              </div>
-              <div className="text-gray text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
