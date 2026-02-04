@@ -95,7 +95,7 @@ function CertificateCard({ cert, index }: { cert: typeof certificates[0]; index:
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="flex-shrink-0 w-[340px] group"
     >
@@ -275,7 +275,7 @@ export default function Certificates() {
         <motion.p 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="md:hidden text-center text-gray/50 text-sm mt-6"
         >
           ← Swipe to explore →
@@ -285,7 +285,7 @@ export default function Certificates() {
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex justify-center gap-2 mt-8"
         >
           {Array.from({ length: Math.ceil(certificates.length / 3) }).map((_, i) => (

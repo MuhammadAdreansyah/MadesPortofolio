@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback, useSyncExternalStore } from 'react';
+import { useEffect, useState, useCallback, useSyncExternalStore, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 // Check if touch device on client
@@ -29,19 +29,33 @@ export default function CursorGrid() {
   const x = useSpring(mouseX, springConfig);
   const y = useSpring(mouseY, springConfig);
 
+  // Use ref to avoid recreating callback
+  const isVisibleRef = useRef(isVisible);
+  const isInHeroRef = useRef(isInHero);
+  const lastHeroCheckRef = useRef(0);
+  
+  useEffect(() => {
+    isVisibleRef.current = isVisible;
+    isInHeroRef.current = isInHero;
+  }, [isVisible, isInHero]);
+
   const handleMouseMove = useCallback((e: MouseEvent) => {
     mouseX.set(e.clientX);
     mouseY.set(e.clientY);
-    if (!isVisible) setIsVisible(true);
+    if (!isVisibleRef.current) setIsVisible(true);
 
-    // Check if cursor is in hero section (throttled check)
-    const heroSection = document.getElementById('home');
-    if (heroSection) {
-      const rect = heroSection.getBoundingClientRect();
-      const isInHeroArea = e.clientY >= rect.top && e.clientY <= rect.bottom;
-      if (isInHeroArea !== isInHero) setIsInHero(isInHeroArea);
+    // Throttle hero section check to every 100ms
+    const now = Date.now();
+    if (now - lastHeroCheckRef.current > 100) {
+      lastHeroCheckRef.current = now;
+      const heroSection = document.getElementById('home');
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        const isInHeroArea = e.clientY >= rect.top && e.clientY <= rect.bottom;
+        if (isInHeroArea !== isInHeroRef.current) setIsInHero(isInHeroArea);
+      }
     }
-  }, [mouseX, mouseY, isVisible, isInHero]);
+  }, [mouseX, mouseY]);
 
   const handleMouseLeave = useCallback(() => {
     setIsVisible(false);

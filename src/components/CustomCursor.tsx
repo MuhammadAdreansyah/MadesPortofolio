@@ -32,6 +32,9 @@ export default function CustomCursor() {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
 
+    // Track added elements to avoid duplicate listeners
+    const processedElements = new WeakSet<Element>();
+    
     // Add hover detection for interactive elements
     const addHoverListeners = () => {
       const interactiveElements = document.querySelectorAll(
@@ -39,31 +42,41 @@ export default function CustomCursor() {
       );
 
       interactiveElements.forEach((el) => {
+        // Skip if already processed
+        if (processedElements.has(el)) return;
+        processedElements.add(el);
+        
         el.addEventListener('mouseenter', () => setIsHovering(true));
         el.addEventListener('mouseleave', () => setIsHovering(false));
       });
     };
 
-    window.addEventListener('mousemove', moveCursor);
+    window.addEventListener('mousemove', moveCursor, { passive: true });
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Initial setup and mutation observer for dynamic content
+    // Initial setup
     addHoverListeners();
     
-    // Debounced observer to reduce performance impact
-    let timeoutId: NodeJS.Timeout;
+    // Use IntersectionObserver-style approach - only check periodically, not on every mutation
+    let mutationTimeout: NodeJS.Timeout | null = null;
     const observer = new MutationObserver(() => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(addHoverListeners, 100);
+      // Batch mutations and debounce heavily
+      if (mutationTimeout) return;
+      mutationTimeout = setTimeout(() => {
+        addHoverListeners();
+        mutationTimeout = null;
+      }, 500);
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    
+    // Only observe childList changes, not subtree for better performance
+    observer.observe(document.body, { childList: true });
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
-      clearTimeout(timeoutId);
+      if (mutationTimeout) clearTimeout(mutationTimeout);
       observer.disconnect();
     };
   }, [cursorX, cursorY]);

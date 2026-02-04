@@ -94,6 +94,7 @@ function ConstellationBackground() {
     if (!ctx) return;
     
     let animationId: number;
+    let isVisible = true;
     let particles: Array<{
       x: number;
       y: number;
@@ -105,21 +106,26 @@ function ConstellationBackground() {
     }> = [];
     
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      const dpr = Math.min(window.devicePixelRatio, 2); // Cap DPR for performance
+      canvas.width = canvas.offsetWidth * dpr;
+      canvas.height = canvas.offsetHeight * dpr;
+      ctx.scale(dpr, dpr);
     };
     
     const initParticles = () => {
       particles = [];
-      const numParticles = Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 18000);
+      // Reduce particle count for better performance
+      const numParticles = Math.min(
+        Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 25000),
+        50 // Cap max particles
+      );
       
       for (let i = 0; i < numParticles; i++) {
         particles.push({
           x: Math.random() * canvas.offsetWidth,
           y: Math.random() * canvas.offsetHeight,
-          vx: (Math.random() - 0.5) * 0.2,
-          vy: (Math.random() - 0.5) * 0.2,
+          vx: (Math.random() - 0.5) * 0.15,
+          vy: (Math.random() - 0.5) * 0.15,
           size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.4 + 0.1,
           pulse: Math.random() * Math.PI * 2,
@@ -127,16 +133,34 @@ function ConstellationBackground() {
       }
     };
     
-    const drawParticles = () => {
+    let lastTime = 0;
+    const targetFPS = 30; // Reduce to 30fps for background animation
+    const frameInterval = 1000 / targetFPS;
+    
+    const drawParticles = (currentTime: number) => {
+      if (!isVisible) {
+        animationId = requestAnimationFrame(drawParticles);
+        return;
+      }
+      
+      // Throttle to target FPS
+      if (currentTime - lastTime < frameInterval) {
+        animationId = requestAnimationFrame(drawParticles);
+        return;
+      }
+      lastTime = currentTime;
+      
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
       
+      // Optimize: reduce connection checks by only checking nearby particles
       particles.forEach((p1, i) => {
         particles.slice(i + 1).forEach(p2 => {
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy; // Use squared distance to avoid sqrt
           
-          if (dist < 80) {
+          if (distSq < 6400) { // 80^2
+            const dist = Math.sqrt(distSq);
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
@@ -168,13 +192,34 @@ function ConstellationBackground() {
       animationId = requestAnimationFrame(drawParticles);
     };
     
+    // Visibility API to pause when tab is hidden
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+    };
+    
+    // Intersection Observer to pause when not in viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting && !document.hidden;
+      },
+      { threshold: 0.1 }
+    );
+    
     resize();
     initParticles();
-    drawParticles();
+    animationId = requestAnimationFrame(drawParticles);
     
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    observer.observe(canvas);
+    
+    // Debounce resize handler
+    let resizeTimeout: NodeJS.Timeout;
     const handleResize = () => {
-      resize();
-      initParticles();
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        resize();
+        initParticles();
+      }, 200);
     };
     
     window.addEventListener('resize', handleResize);
@@ -182,6 +227,9 @@ function ConstellationBackground() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      observer.disconnect();
+      clearTimeout(resizeTimeout);
     };
   }, []);
   
@@ -357,7 +405,7 @@ function OrbitalCategory({
       ref={containerRef}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="relative w-full"
       style={{ aspectRatio: '1' }}
@@ -694,7 +742,7 @@ export default function Skills() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16"
         >
           {[
@@ -749,7 +797,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="text-center mt-16 md:mt-20"
         >
           <p className="text-gray-400 mb-5 text-sm">
@@ -762,7 +810,7 @@ export default function Skills() {
                 key={tech}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: index * 0.08 }}
                 whileHover={{ scale: 1.05 }}
                 className="px-4 py-1.5 rounded-full text-sm font-medium cursor-default"
@@ -781,7 +829,7 @@ export default function Skills() {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="mt-10 mx-auto w-32 h-px"
             style={{

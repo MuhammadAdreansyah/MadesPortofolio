@@ -99,7 +99,7 @@ function ExperienceCard({
         <motion.div
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ delay: index * 0.1, duration: 0.3 }}
           className="w-3 h-3 rounded-full"
           style={{ 
@@ -116,7 +116,7 @@ function ExperienceCard({
       <motion.div
         initial={{ opacity: 0, x: isEven ? 50 : -50 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className="w-full md:w-1/2"
       >
@@ -360,7 +360,7 @@ export default function Experience() {
             className="hidden md:flex flex-col items-center justify-center mt-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
           >
             <div 
               className="w-3 h-3 rounded-full mb-3"

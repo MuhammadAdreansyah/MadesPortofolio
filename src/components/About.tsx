@@ -54,7 +54,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-5"
           >
@@ -85,7 +85,7 @@ export default function About() {
                 <motion.div
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.2 }}
                   transition={{ delay: 0.4, type: 'spring' }}
                   className="absolute -bottom-4 -right-4 md:right-4 bg-accent text-dark px-5 py-3 rounded-xl shadow-xl"
                 >
@@ -98,7 +98,7 @@ export default function About() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ delay: 0.4 }}
                 className="mt-10 lg:mt-12 p-6 rounded-xl bg-gradient-to-br from-accent/10 via-accent/5 to-transparent border-l-4 border-accent backdrop-blur-sm"
               >
@@ -115,7 +115,7 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-7 space-y-8"
           >
@@ -149,7 +149,7 @@ export default function About() {
                     key={item}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
@@ -171,7 +171,7 @@ export default function About() {
                     key={item.year}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-accent/10 hover:border-accent/30 hover:bg-secondary/50 transition-all duration-300 group"
                   >
@@ -194,7 +194,7 @@ export default function About() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ delay: 0.3 }}
               className="flex flex-wrap items-center justify-start gap-4 pt-8 mt-4 border-t border-accent/10"
             >

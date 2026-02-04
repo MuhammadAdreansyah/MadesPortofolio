@@ -25,7 +25,7 @@ export default function SectionTitle({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5 }}
       className={`max-w-2xl mb-12 ${alignments[align]}`}
     >

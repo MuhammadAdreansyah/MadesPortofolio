@@ -97,7 +97,7 @@ function ProjectCard({ project, index, onSelect }: {
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
+      viewport={{ once: false, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className={`group relative cursor-pointer ${isLarge ? 'md:col-span-2' : ''}`}
       onClick={onSelect}
@@ -256,7 +256,7 @@ function ProjectCard({ project, index, onSelect }: {
           style={{ background: `linear-gradient(90deg, ${ACCENT_COLOR}, transparent)` }}
           initial={{ width: 0 }}
           whileInView={{ width: '50%' }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
         />
       </div>
@@ -313,7 +313,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
         >
           {categories.map((category, index) => (
@@ -360,7 +360,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }}
           className="text-center mt-14"
         >
           <motion.a
