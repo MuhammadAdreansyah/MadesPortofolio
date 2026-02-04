@@ -40,7 +40,7 @@ const projects = [
     title: 'Mobile Banking UI',
     description: 'Modern mobile banking app interface design with seamless user experience.',
     longDescription: 'Designed a complete mobile banking experience focusing on security, ease of use, and modern aesthetics.',
-    image: '/images/projects/banking.jpg',
+    image: '/images/projects/bri.jpeg',
     category: 'UI/UX',
     technologies: ['Figma', 'React Native', 'TypeScript'],
     liveUrl: 'https://example.com',
