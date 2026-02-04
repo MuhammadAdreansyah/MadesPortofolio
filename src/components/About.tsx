@@ -117,13 +117,13 @@ export default function About() {
                 ))}
               </div>
               
-              {/* Philosophy Quote */}
+              {/* Philosophy Quote - Added more top margin for better spacing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="p-5 rounded-xl bg-accent/5 border-l-4 border-accent"
+                className="mt-8 p-6 rounded-xl bg-accent/5 border-l-4 border-accent"
               >
                 <p className="text-light/90 text-sm italic leading-relaxed">
                   &quot;Code is poetry. Every function tells a story, every algorithm solves a puzzle, 
@@ -186,31 +186,28 @@ export default function About() {
             </div>
             
             {/* Journey Timeline */}
-            <div>
+            <div className="pt-2">
               <h4 className="text-lg font-semibold text-light mb-6">My Journey</h4>
               <div className="relative">
-                {/* Timeline Line */}
-                <div className="absolute top-0 bottom-0 left-[39px] w-px bg-gradient-to-b from-accent via-accent/50 to-transparent" />
-                
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {journey.map((item, index) => (
                     <motion.div
                       key={item.year}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.15 }}
-                      className="flex items-start gap-6"
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-accent/10 hover:border-accent/30 hover:bg-secondary/50 transition-all duration-300 group"
                     >
                       {/* Year Badge */}
-                      <div className="relative z-10 w-20 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0">
+                      <div className="w-16 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
                         <span className="text-accent font-bold text-sm">{item.year}</span>
                       </div>
                       
                       {/* Content */}
-                      <div className="pt-2">
-                        <h5 className="text-light font-medium">{item.title}</h5>
-                        <p className="text-gray text-sm">{item.desc}</p>
+                      <div>
+                        <h5 className="text-light font-medium text-sm">{item.title}</h5>
+                        <p className="text-gray text-xs">{item.desc}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -218,18 +215,25 @@ export default function About() {
               </div>
             </div>
             
-            {/* CTA */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <Button variant="accent" icon={<FiDownload />}>
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4 pt-6"
+            >
+              <Button variant="accent" icon={<FiDownload />} className="flex-1 sm:flex-none justify-center">
                 Download CV
               </Button>
               <Button 
                 variant="outline" 
+                className="flex-1 sm:flex-none justify-center"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Let&apos;s Talk
               </Button>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
