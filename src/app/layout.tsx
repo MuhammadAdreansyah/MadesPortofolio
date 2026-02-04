@@ -15,6 +15,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://muhammadadreansyah.github.io/MadesPortofolio'),
   title: "Madesmac | Full Stack Developer Portfolio",
   description: "Professional portfolio of Madesmac - Full Stack Developer specializing in React, Next.js, Node.js, and modern web technologies. View my projects, skills, and get in touch.",
   keywords: ["Full Stack Developer", "React Developer", "Next.js", "Portfolio", "Web Developer", "JavaScript", "TypeScript"],
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://madesmac.dev",
+    url: "https://muhammadadreansyah.github.io/MadesPortofolio",
     siteName: "Madesmac Portfolio",
     title: "Madesmac | Full Stack Developer",
     description: "Professional portfolio showcasing projects and skills in web development.",
