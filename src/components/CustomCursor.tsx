@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
@@ -11,11 +11,6 @@ export default function CustomCursor() {
   // Mouse position
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
-
-  // Smooth spring animation for trailing circle
-  const springConfig = { damping: 25, stiffness: 300 };
-  const trailX = useSpring(cursorX, springConfig);
-  const trailY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
     // Check for touch device
@@ -80,7 +75,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Small dot cursor */}
+      {/* Single dot cursor with glow effect */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999]"
         style={{
@@ -90,36 +85,38 @@ export default function CustomCursor() {
           translateY: '-50%',
         }}
       >
+        {/* Glow layer behind the dot */}
         <motion.div
           animate={{
-            scale: isHovering ? 0.5 : 1,
-            opacity: isVisible ? 1 : 0,
+            scale: isHovering ? 2.5 : 1.5,
+            opacity: isVisible ? (isHovering ? 0.6 : 0.3) : 0,
           }}
-          transition={{ duration: 0.15 }}
-          className="w-2 h-2 bg-accent rounded-full"
-          style={{ mixBlendMode: 'difference' }}
+          transition={{ duration: 0.2 }}
+          className="absolute inset-0 w-3 h-3 rounded-full"
+          style={{ 
+            background: isHovering 
+              ? 'radial-gradient(circle, rgba(201, 165, 90, 0.8) 0%, rgba(201, 165, 90, 0.3) 40%, transparent 70%)'
+              : 'radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 70%)',
+            filter: 'blur(2px)',
+            transform: 'translate(-50%, -50%)',
+            left: '50%',
+            top: '50%',
+          }}
         />
-      </motion.div>
-
-      {/* Trailing circle cursor */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998]"
-        style={{
-          x: trailX,
-          y: trailY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
-      >
+        {/* Main dot */}
         <motion.div
           animate={{
             scale: isHovering ? 1.5 : 1,
-            borderColor: isHovering ? '#083A24' : '#C9A55A',
             opacity: isVisible ? 1 : 0,
           }}
           transition={{ duration: 0.15 }}
-          className="w-5 h-5 rounded-full border border-accent"
-          style={{ mixBlendMode: 'difference' }}
+          className={`w-3 h-3 rounded-full ${isHovering ? 'bg-accent' : 'bg-white'}`}
+          style={{ 
+            mixBlendMode: 'difference',
+            boxShadow: isHovering 
+              ? '0 0 15px 5px rgba(201, 165, 90, 0.7), 0 0 30px 10px rgba(201, 165, 90, 0.4)' 
+              : '0 0 8px 3px rgba(255, 255, 255, 0.3)'
+          }}
         />
       </motion.div>
 
