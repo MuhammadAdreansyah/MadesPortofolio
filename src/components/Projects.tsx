@@ -461,38 +461,45 @@ export default function Projects() {
                 </motion.button>
               </div>
 
-              {/* Left Side - Screenshot Preview */}
-              <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full bg-[#0A0A0A] flex items-center justify-center overflow-hidden">
+              {/* Left Side - Screenshot Preview with Scroll */}
+              <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full bg-[#0A0A0A] flex flex-col overflow-hidden">
                 {/* Decorative gradient */}
                 <div 
-                  className="absolute inset-0 pointer-events-none"
+                  className="absolute inset-0 pointer-events-none z-10"
                   style={{
-                    background: `radial-gradient(ellipse at center, ${ACCENT_COLOR}08 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse at center top, ${ACCENT_COLOR}08 0%, transparent 50%)`,
                   }}
                 />
                 
-                <div className="relative w-full h-full p-8 pt-20 lg:p-16 flex items-center justify-center">
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 }}
-                    className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl"
-                    style={{
-                      boxShadow: `0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px ${ACCENT_COLOR}10`,
-                    }}
-                  >
-                    <Image
-                      src={selectedProject.image}
-                      alt={selectedProject.title}
-                      width={800}
-                      height={600}
-                      className="w-full h-auto object-cover"
-                    />
-                  </motion.div>
+                {/* Scrollable Image Container */}
+                <div className="relative w-full h-full pt-20 lg:pt-16 overflow-y-auto custom-scrollbar">
+                  <div className="px-6 pb-6 lg:px-12 lg:pb-12">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="relative rounded-xl overflow-hidden shadow-2xl"
+                      style={{
+                        boxShadow: `0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px ${ACCENT_COLOR}10`,
+                      }}
+                    >
+                      <Image
+                        src={selectedProject.image}
+                        alt={selectedProject.title}
+                        width={800}
+                        height={2000}
+                        className="w-full h-auto object-contain"
+                        style={{ maxHeight: 'none' }}
+                      />
+                    </motion.div>
+                  </div>
                 </div>
 
+                {/* Top gradient fade for scroll indication */}
+                <div className="absolute top-20 lg:top-16 left-0 right-0 h-8 bg-gradient-to-b from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+                
                 {/* Bottom gradient fade */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A] to-transparent lg:hidden" />
+                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
               </div>
 
               {/* Right Side - Project Details */}
