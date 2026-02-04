@@ -117,19 +117,19 @@ export default function About() {
                 ))}
               </div>
               
-              {/* Philosophy Quote - Added more top margin for better spacing */}
+              {/* Philosophy Quote - Better visual separation with enhanced spacing */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="mt-8 p-6 rounded-xl bg-accent/5 border-l-4 border-accent"
+                className="mt-10 lg:mt-12 p-6 rounded-xl bg-gradient-to-br from-accent/10 via-accent/5 to-transparent border-l-4 border-accent backdrop-blur-sm"
               >
                 <p className="text-light/90 text-sm italic leading-relaxed">
                   &quot;Code is poetry. Every function tells a story, every algorithm solves a puzzle, 
                   and every pixel creates an experience.&quot;
                 </p>
-                <p className="text-accent text-xs mt-3 font-medium">— My Development Philosophy</p>
+                <p className="text-accent text-xs mt-4 font-medium tracking-wide">— My Development Philosophy</p>
               </motion.div>
             </div>
           </motion.div>
@@ -185,50 +185,48 @@ export default function About() {
               </div>
             </div>
             
-            {/* Journey Timeline */}
-            <div className="pt-2">
+            {/* Journey Timeline - Enhanced spacing and visual hierarchy */}
+            <div className="pt-8 mt-2 border-t border-accent/10">
               <h4 className="text-lg font-semibold text-light mb-6">My Journey</h4>
-              <div className="relative">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {journey.map((item, index) => (
-                    <motion.div
-                      key={item.year}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-accent/10 hover:border-accent/30 hover:bg-secondary/50 transition-all duration-300 group"
-                    >
-                      {/* Year Badge */}
-                      <div className="w-16 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
-                        <span className="text-accent font-bold text-sm">{item.year}</span>
-                      </div>
-                      
-                      {/* Content */}
-                      <div>
-                        <h5 className="text-light font-medium text-sm">{item.title}</h5>
-                        <p className="text-gray text-xs">{item.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {journey.map((item, index) => (
+                  <motion.div
+                    key={item.year}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-4 p-4 rounded-xl bg-secondary/30 border border-accent/10 hover:border-accent/30 hover:bg-secondary/50 transition-all duration-300 group"
+                  >
+                    {/* Year Badge */}
+                    <div className="w-16 h-10 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center flex-shrink-0 group-hover:bg-accent/20 transition-colors">
+                      <span className="text-accent font-bold text-sm">{item.year}</span>
+                    </div>
+                    
+                    {/* Content */}
+                    <div>
+                      <h5 className="text-light font-medium text-sm">{item.title}</h5>
+                      <p className="text-gray text-xs">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
             
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Better alignment and visual separation */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 pt-6"
+              className="flex flex-wrap items-center justify-start gap-4 pt-8 mt-4 border-t border-accent/10"
             >
-              <Button variant="accent" icon={<FiDownload />} className="flex-1 sm:flex-none justify-center">
+              <Button variant="accent" icon={<FiDownload />} className="min-w-[160px] justify-center">
                 Download CV
               </Button>
               <Button 
                 variant="outline" 
-                className="flex-1 sm:flex-none justify-center"
+                className="min-w-[140px] justify-center"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Let&apos;s Talk
