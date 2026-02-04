@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiArrowRight, FiChevronLeft, FiChevronRight, FiArrowLeft } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import SectionTitle from './ui/SectionTitle';
 
 const ACCENT_COLOR = '#C9A55A';
@@ -394,93 +394,46 @@ export default function Projects() {
           >
             {/* Full Screen Content */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="w-full h-full flex flex-col lg:flex-row"
             >
-              {/* Back Button */}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                whileHover={{ x: -5 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 left-6 z-20 flex items-center gap-3 text-sm font-medium transition-colors"
-                style={{ color: ACCENT_COLOR }}
-              >
-                <div 
-                  className="w-10 h-10 rounded-full flex items-center justify-center"
-                  style={{
-                    background: `${ACCENT_COLOR}15`,
-                    border: `1px solid ${ACCENT_COLOR}30`,
-                  }}
-                >
-                  <FiArrowLeft size={18} />
-                </div>
-                <span className="hidden sm:inline">Back to Projects</span>
-              </motion.button>
-
-              {/* Navigation Arrows */}
-              <div className="absolute top-6 right-6 z-20 flex items-center gap-3">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
-                    const prevIndex = currentIndex > 0 ? currentIndex - 1 : projects.length - 1;
-                    setSelectedProject(projects[prevIndex]);
-                  }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                  style={{ 
-                    background: `${ACCENT_COLOR}15`,
-                    color: ACCENT_COLOR,
-                    border: `1px solid ${ACCENT_COLOR}30`,
-                  }}
-                >
-                  <FiChevronLeft size={20} />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
-                    const nextIndex = currentIndex < projects.length - 1 ? currentIndex + 1 : 0;
-                    setSelectedProject(projects[nextIndex]);
-                  }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                  style={{ 
-                    background: `${ACCENT_COLOR}15`,
-                    color: ACCENT_COLOR,
-                    border: `1px solid ${ACCENT_COLOR}30`,
-                  }}
-                >
-                  <FiChevronRight size={20} />
-                </motion.button>
-              </div>
-
               {/* Left Side - Screenshot Preview with Scroll */}
-              <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full bg-[#0A0A0A] flex flex-col overflow-hidden">
-                {/* Decorative gradient */}
-                <div 
-                  className="absolute inset-0 pointer-events-none z-10"
-                  style={{
-                    background: `radial-gradient(ellipse at center top, ${ACCENT_COLOR}08 0%, transparent 50%)`,
-                  }}
-                />
+              <div className="relative w-full lg:w-[55%] h-[45vh] lg:h-full bg-[#080808] flex flex-col overflow-hidden">
+                {/* Back Button - Mobile & Desktop */}
+                <motion.button
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  whileHover={{ x: -3 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 left-4 lg:top-6 lg:left-6 z-20 flex items-center gap-2 text-sm font-medium transition-colors"
+                  style={{ color: ACCENT_COLOR }}
+                >
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-sm"
+                    style={{
+                      background: 'rgba(10,10,10,0.8)',
+                      border: `1px solid ${ACCENT_COLOR}40`,
+                    }}
+                  >
+                    <FiArrowLeft size={18} />
+                  </div>
+                </motion.button>
                 
                 {/* Scrollable Image Container */}
-                <div className="relative w-full h-full pt-20 lg:pt-16 overflow-y-auto custom-scrollbar">
-                  <div className="px-6 pb-6 lg:px-12 lg:pb-12">
+                <div className="relative w-full h-full overflow-y-auto custom-scrollbar">
+                  <div className="p-4 pt-16 lg:p-8 lg:pt-8">
                     <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.1 }}
-                      className="relative rounded-xl overflow-hidden shadow-2xl"
+                      className="relative rounded-lg overflow-hidden"
                       style={{
-                        boxShadow: `0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px ${ACCENT_COLOR}10`,
+                        boxShadow: `0 20px 60px -15px rgba(0,0,0,0.9)`,
                       }}
                     >
                       <Image
@@ -488,134 +441,152 @@ export default function Projects() {
                         alt={selectedProject.title}
                         width={800}
                         height={2000}
-                        className="w-full h-auto object-contain"
+                        className="w-full h-auto"
                         style={{ maxHeight: 'none' }}
                       />
                     </motion.div>
                   </div>
                 </div>
 
-                {/* Top gradient fade for scroll indication */}
-                <div className="absolute top-20 lg:top-16 left-0 right-0 h-8 bg-gradient-to-b from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
-                
                 {/* Bottom gradient fade */}
-                <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-[#0A0A0A] to-transparent z-10 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#080808] to-transparent pointer-events-none" />
               </div>
 
               {/* Right Side - Project Details */}
-              <div className="w-full lg:w-1/2 h-[60vh] lg:h-full flex flex-col justify-center p-6 sm:p-10 lg:p-16 overflow-y-auto">
-                <div className="max-w-xl">
-                  {/* Tech Stack Tags */}
-                  <motion.div 
-                    className="flex flex-wrap gap-2 mb-6"
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.15 }}
+              <div className="relative w-full lg:w-[45%] h-[55vh] lg:h-full bg-[#0A0A0A] flex flex-col">
+                {/* Navigation Arrows - Top Right */}
+                <div className="absolute top-4 right-4 lg:top-6 lg:right-6 z-20 flex items-center gap-2">
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
+                      const prevIndex = currentIndex > 0 ? currentIndex - 1 : projects.length - 1;
+                      setSelectedProject(projects[prevIndex]);
+                    }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                    style={{ 
+                      background: ACCENT_COLOR,
+                      color: '#0A0A0A',
+                    }}
                   >
-                    {selectedProject.technologies.map((tech, i) => (
-                      <motion.span
-                        key={tech}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.2 + i * 0.04 }}
-                        style={{ color: ACCENT_COLOR }}
-                        className="text-sm font-medium"
+                    <FiArrowLeft size={18} />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
+                      const nextIndex = currentIndex < projects.length - 1 ? currentIndex + 1 : 0;
+                      setSelectedProject(projects[nextIndex]);
+                    }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center transition-all"
+                    style={{ 
+                      background: 'transparent',
+                      color: '#F5F5F5',
+                      border: `1px solid rgba(255,255,255,0.2)`,
+                    }}
+                  >
+                    <FiArrowRight size={18} />
+                  </motion.button>
+                </div>
+
+                {/* Content Area */}
+                <div className="flex-1 flex flex-col justify-center p-6 pt-16 lg:p-12 lg:pt-12 overflow-y-auto">
+                  <div className="max-w-lg">
+                    {/* Tech Stack Tags */}
+                    <motion.div 
+                      className="flex flex-wrap gap-x-3 gap-y-1 mb-6"
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15 }}
+                    >
+                      {selectedProject.technologies.map((tech, i) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ delay: 0.2 + i * 0.03 }}
+                          style={{ color: ACCENT_COLOR }}
+                          className="text-sm font-medium tracking-wide"
+                        >
+                          #{tech.replace(/\s+/g, '')}
+                        </motion.span>
+                      ))}
+                    </motion.div>
+
+                    {/* Project Title */}
+                    <motion.h2 
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold font-heading text-white mb-5 leading-tight"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {selectedProject.title}
+                    </motion.h2>
+                    
+                    {/* Project Description */}
+                    <motion.p 
+                      className="text-gray-400 text-sm lg:text-base leading-relaxed mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 }}
+                    >
+                      {selectedProject.longDescription}
+                    </motion.p>
+
+                    {/* Visit Button */}
+                    <motion.div 
+                      className="mb-8"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      <motion.a
+                        whileHover={{ scale: 1.02, boxShadow: `0 0 30px ${ACCENT_COLOR}40` }}
+                        whileTap={{ scale: 0.98 }}
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-lg font-semibold text-sm tracking-wider uppercase"
+                        style={{
+                          background: ACCENT_COLOR,
+                          color: '#0A0A0A',
+                        }}
                       >
-                        #{tech.replace(/\s+/g, '')}
-                      </motion.span>
-                    ))}
-                  </motion.div>
+                        <span>Visit</span>
+                        <FiExternalLink size={16} />
+                      </motion.a>
+                    </motion.div>
+                  </div>
+                </div>
 
-                  {/* Project Title */}
-                  <motion.h2 
-                    className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-white mb-6"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
+                {/* Bottom Section - Project Counter & Source Code */}
+                <div 
+                  className="px-6 py-4 lg:px-12 lg:py-6 flex items-center justify-between"
+                  style={{ borderTop: `1px solid rgba(255,255,255,0.08)` }}
+                >
+                  {/* Source Code Link */}
+                  <motion.a
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ color: ACCENT_COLOR }}
+                    className="flex items-center gap-2 text-sm text-gray-500 transition-colors"
                   >
-                    {selectedProject.title}
-                  </motion.h2>
-                  
-                  {/* Project Description */}
-                  <motion.p 
-                    className="text-gray-400 text-base lg:text-lg leading-relaxed mb-8"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.25 }}
-                  >
-                    {selectedProject.longDescription}
-                  </motion.p>
-
-                  {/* Category Badge */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="mb-8"
-                  >
-                    <span 
-                      className="px-5 py-2 rounded-full text-sm font-medium"
-                      style={{
-                        background: `${ACCENT_COLOR}12`,
-                        color: ACCENT_COLOR,
-                        border: `1px solid ${ACCENT_COLOR}25`,
-                      }}
-                    >
-                      {selectedProject.category}
-                    </span>
-                  </motion.div>
-
-                  {/* Action Buttons */}
-                  <motion.div 
-                    className="flex flex-col sm:flex-row gap-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.35 }}
-                  >
-                    <motion.a
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      href={selectedProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold"
-                      style={{
-                        background: `linear-gradient(135deg, ${ACCENT_COLOR}, ${ACCENT_COLOR}DD)`,
-                        color: '#0A0A0A',
-                      }}
-                    >
-                      <span>Visit Live</span>
-                      <FiExternalLink size={18} />
-                    </motion.a>
-                    <motion.a
-                      whileHover={{ scale: 1.02, background: `${ACCENT_COLOR}15` }}
-                      whileTap={{ scale: 0.98 }}
-                      href={selectedProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-medium transition-all"
-                      style={{
-                        border: `1px solid ${ACCENT_COLOR}30`,
-                        color: '#F5F5F5',
-                      }}
-                    >
-                      <FiGithub size={20} />
-                      <span>Source Code</span>
-                    </motion.a>
-                  </motion.div>
+                    <FiGithub size={16} />
+                    <span>Source Code</span>
+                  </motion.a>
 
                   {/* Project Index */}
-                  <motion.div
+                  <motion.span
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
-                    className="mt-10 pt-6"
-                    style={{ borderTop: `1px solid ${ACCENT_COLOR}15` }}
+                    className="text-2xl font-light text-gray-600"
                   >
-                    <span style={{ color: `${ACCENT_COLOR}60` }} className="text-sm font-medium">
-                      Project {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                    </span>
-                  </motion.div>
+                    {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')}
+                  </motion.span>
                 </div>
               </div>
             </motion.div>
