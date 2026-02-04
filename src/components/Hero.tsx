@@ -5,7 +5,19 @@ import { FiArrowDown } from 'react-icons/fi';
 import { BsMouse } from 'react-icons/bs';
 import TextScramble from './ui/TextScramble';
 
+const ACCENT_COLOR = '#C9A55A';
+
+// Dynamic roles - customize these!
+const ROLES = [
+  'Full Stack Developer',
+  'Data Engineer',
+  'Database Developer',
+  'Backend Developer',
+  'Software Engineer',
+];
+
 export default function Hero() {
+
   const handleScrollClick = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -28,96 +40,105 @@ export default function Hero() {
         </video>
       </div>
 
-      {/* Gradient Overlay - darker and more professional */}
+      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-dark/90 via-dark/85 to-dark" />
       
-      {/* Subtle vignette effect */}
-      <div className="absolute inset-0" style={{
-        background: 'radial-gradient(ellipse at center, transparent 0%, rgba(10,10,10,0.4) 100%)'
-      }} />
+      {/* Subtle gradient accent */}
+      <div 
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse, ${ACCENT_COLOR}08 0%, transparent 70%)`,
+        }}
+      />
 
-      {/* Subtle accent glow - very minimal */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent/5 rounded-full blur-[120px]" />
-      </div>
+      {/* Main Content */}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 
-      {/* Main Content - Centered and Professional */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Main Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold font-heading mb-6 tracking-tight">
-            <span className="text-light">Mades</span>
-            <span className="text-accent">mac</span>
-          </h1>
-        </motion.div>
-
-        {/* Role with Scramble Effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-6"
-        >
-          <div className="text-2xl sm:text-3xl lg:text-4xl text-light/90 font-light flex items-center justify-center gap-3">
-            <span className="w-12 h-[1px] bg-accent/50" />
-            <TextScramble 
-              texts={[
-                'Full Stack Developer',
-                'UI/UX Designer',
-                'Problem Solver',
-                'Tech Enthusiast',
-              ]}
-              className="text-light font-medium"
-            />
-            <span className="w-12 h-[1px] bg-accent/50" />
-          </div>
-        </motion.div>
-
-        {/* Tagline */}
+        {/* Greeting */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-gray text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-gray-400 text-lg mb-4"
         >
-          Crafting elegant digital experiences with clean code and modern technologies.
-          <br className="hidden sm:block" />
-          Turning complex problems into simple, beautiful solutions.
+          Hello, I&apos;m
+        </motion.p>
+
+        {/* Name */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
+        >
+          <span className="text-white">Mades</span>
+          <span style={{ color: ACCENT_COLOR }}>mac</span>
+        </motion.h1>
+
+        {/* Dynamic Role with Scramble Effect */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-8"
+        >
+          <div className="text-xl sm:text-2xl lg:text-3xl text-white/90 font-light flex items-center justify-center gap-3">
+            <span 
+              className="hidden sm:block w-8 h-[2px]"
+              style={{ background: `linear-gradient(90deg, transparent, ${ACCENT_COLOR})` }}
+            />
+            <TextScramble 
+              texts={ROLES} 
+              className="font-medium"
+              interval={5000}
+              speed={60}
+            />
+            <span 
+              className="hidden sm:block w-8 h-[2px]"
+              style={{ background: `linear-gradient(90deg, ${ACCENT_COLOR}, transparent)` }}
+            />
+          </div>
+        </motion.div>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed"
+        >
+          Passionate about building scalable applications, designing efficient databases, 
+          and transforming data into actionable insights.
         </motion.p>
       </div>
 
-      {/* Scroll Indicator with Mouse Icon - Always Visible */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
       >
         <motion.button
           onClick={handleScrollClick}
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex flex-col items-center gap-3 text-gray/60 hover:text-accent transition-colors cursor-pointer group"
+          className="flex flex-col items-center gap-2 text-gray-500 hover:text-accent transition-colors cursor-pointer"
         >
-          <BsMouse size={28} className="group-hover:text-accent transition-colors" />
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <FiArrowDown size={16} />
-          </motion.div>
+          <BsMouse size={24} />
+          <FiArrowDown size={14} />
         </motion.button>
       </motion.div>
 
-      {/* Subtle corner accents */}
-      <div className="absolute top-20 left-8 w-20 h-[1px] bg-gradient-to-r from-accent/30 to-transparent" />
-      <div className="absolute top-20 left-8 w-[1px] h-20 bg-gradient-to-b from-accent/30 to-transparent" />
-      <div className="absolute bottom-20 right-8 w-20 h-[1px] bg-gradient-to-l from-accent/30 to-transparent" />
-      <div className="absolute bottom-20 right-8 w-[1px] h-20 bg-gradient-to-t from-accent/30 to-transparent" />
+      {/* Simple corner accents */}
+      <div 
+        className="absolute top-20 left-8 w-16 h-16 border-l border-t opacity-20"
+        style={{ borderColor: ACCENT_COLOR }}
+      />
+      <div 
+        className="absolute bottom-20 right-8 w-16 h-16 border-r border-b opacity-20"
+        style={{ borderColor: ACCENT_COLOR }}
+      />
     </section>
   );
 }

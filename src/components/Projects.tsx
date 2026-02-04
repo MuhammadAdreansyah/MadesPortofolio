@@ -1,9 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiArrowRight, FiArrowLeft, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import { FiExternalLink, FiGithub, FiArrowRight, FiChevronLeft, FiChevronRight, FiArrowLeft } from 'react-icons/fi';
 import SectionTitle from './ui/SectionTitle';
+
+const ACCENT_COLOR = '#C9A55A';
 
 const categories = ['All', 'Web Apps', 'Mobile', 'UI/UX', 'Open Source'];
 
@@ -19,7 +22,6 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: true,
-    color: '#083A24',
   },
   {
     id: 2,
@@ -32,7 +34,6 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: true,
-    color: '#C9A55A',
   },
   {
     id: 3,
@@ -45,7 +46,6 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: false,
-    color: '#202020',
   },
   {
     id: 4,
@@ -58,7 +58,6 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: false,
-    color: '#0a4d30',
   },
   {
     id: 5,
@@ -71,7 +70,6 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: true,
-    color: '#C9A55A',
   },
   {
     id: 6,
@@ -84,52 +82,40 @@ const projects = [
     liveUrl: 'https://example.com',
     githubUrl: 'https://github.com',
     featured: false,
-    color: '#083A24',
   },
 ];
 
-// Project Card Component
+// Simple Project Card Component (No 3D effects)
 function ProjectCard({ project, index, onSelect }: { 
   project: typeof projects[0]; 
   index: number;
   onSelect: () => void;
 }) {
-  // Determine card size based on index for bento layout
-  // Simpler layout - all cards same size for cleaner look
   const isLarge = index === 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`relative group cursor-pointer ${
-        isLarge ? 'md:col-span-2' : ''
-      }`}
+      className={`group relative cursor-pointer ${isLarge ? 'md:col-span-2' : ''}`}
       onClick={onSelect}
     >
       <div 
-        className="relative h-full rounded-2xl overflow-hidden border border-primary-light/10 hover:border-accent/50 transition-all duration-500"
+        className="relative h-full rounded-2xl overflow-hidden transition-all duration-300 group-hover:border-[#C9A55A]"
+        style={{
+          background: 'linear-gradient(135deg, rgba(25,25,25,0.95), rgba(15,15,15,0.98))',
+          border: '1px solid rgba(201,165,90,0.15)',
+        }}
       >
-        {/* Background Gradient */}
+        {/* Hover Glow Effect */}
         <div 
-          className="absolute inset-0 opacity-80"
-          style={{ 
-            background: `linear-gradient(135deg, ${project.color}40 0%, #0A0A0A 100%)` 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle at 50% 0%, ${ACCENT_COLOR}15 0%, transparent 50%)`,
           }}
         />
-
-        {/* Animated Mesh Gradient */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-          <div 
-            className="absolute inset-0"
-            style={{
-              background: `radial-gradient(circle at 30% 30%, ${project.color}60 0%, transparent 50%),
-                          radial-gradient(circle at 70% 70%, #C9A55A30 0%, transparent 50%)`,
-            }}
-          />
-        </div>
 
         {/* Content Container */}
         <div className="relative h-full p-6 flex flex-col justify-between min-h-[320px]">
@@ -137,22 +123,37 @@ function ProjectCard({ project, index, onSelect }: {
           <div>
             {/* Category & Featured Badge */}
             <div className="flex items-center justify-between mb-4">
-              <span className="px-3 py-1 text-xs font-medium rounded-full bg-white/10 text-light/80 backdrop-blur-sm">
+              <span 
+                className="px-4 py-1.5 text-xs font-semibold rounded-full"
+                style={{
+                  background: `${ACCENT_COLOR}12`,
+                  color: ACCENT_COLOR,
+                  border: `1px solid ${ACCENT_COLOR}30`,
+                }}
+              >
                 {project.category}
               </span>
               {project.featured && (
                 <motion.span 
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  className="px-3 py-1 text-xs font-bold rounded-full bg-accent text-secondary"
+                  transition={{ delay: 0.3 }}
+                  className="px-4 py-1.5 text-xs font-bold rounded-full"
+                  style={{
+                    background: `linear-gradient(135deg, ${ACCENT_COLOR}, ${ACCENT_COLOR}CC)`,
+                    color: '#0A0A0A',
+                  }}
                 >
-                  Featured
+                  ★ Featured
                 </motion.span>
               )}
             </div>
 
             {/* Project Number */}
-            <div className="absolute top-6 right-6 text-[120px] font-bold leading-none text-white/[0.03] select-none pointer-events-none">
+            <div 
+              className="absolute top-6 right-6 text-[80px] font-bold leading-none select-none pointer-events-none opacity-[0.04] group-hover:opacity-[0.08] transition-opacity duration-300"
+              style={{ color: ACCENT_COLOR }}
+            >
               {String(index + 1).padStart(2, '0')}
             </div>
           </div>
@@ -160,30 +161,41 @@ function ProjectCard({ project, index, onSelect }: {
           {/* Bottom Section */}
           <div>
             {/* Title */}
-            <h3 className="text-xl md:text-2xl font-bold font-heading text-light mb-3 group-hover:text-accent transition-colors duration-300">
+            <h3 
+              className="text-xl md:text-2xl font-bold font-heading mb-3 transition-colors duration-300 group-hover:text-[#C9A55A]"
+              style={{ color: '#F5F5F5' }}
+            >
               {project.title}
             </h3>
 
             {/* Description */}
-            <p className="text-gray/80 mb-5 line-clamp-2 text-sm">
+            <p className="text-gray-400 mb-5 line-clamp-2 text-sm leading-relaxed">
               {project.description}
             </p>
 
-            {/* Tech Stack - Animated on hover */}
+            {/* Tech Stack */}
             <div className="flex flex-wrap gap-2 mb-5">
-              {project.technologies.slice(0, 4).map((tech, i) => (
-                <motion.span
+              {project.technologies.slice(0, 4).map((tech) => (
+                <span
                   key={tech}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 + i * 0.05 }}
-                  className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/80 text-light/70 border border-primary-light/20 backdrop-blur-sm"
+                  className="px-3 py-1 text-xs font-medium rounded-full"
+                  style={{
+                    background: 'rgba(201,165,90,0.08)',
+                    color: `${ACCENT_COLOR}CC`,
+                    border: `1px solid ${ACCENT_COLOR}15`,
+                  }}
                 >
                   {tech}
-                </motion.span>
+                </span>
               ))}
               {project.technologies.length > 4 && (
-                <span className="px-3 py-1 text-xs font-medium rounded-full bg-secondary/80 text-accent border border-accent/30">
+                <span 
+                  className="px-3 py-1 text-xs font-medium rounded-full"
+                  style={{
+                    background: `${ACCENT_COLOR}15`,
+                    color: ACCENT_COLOR,
+                  }}
+                >
                   +{project.technologies.length - 4}
                 </span>
               )}
@@ -194,46 +206,58 @@ function ProjectCard({ project, index, onSelect }: {
               {/* Links */}
               <div className="flex gap-3">
                 <motion.a
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-secondary hover:shadow-lg hover:shadow-accent/25 transition-shadow"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
+                  style={{
+                    background: `linear-gradient(135deg, ${ACCENT_COLOR}, ${ACCENT_COLOR}CC)`,
+                    color: '#0A0A0A',
+                  }}
                 >
-                  <FiExternalLink size={18} />
+                  <FiExternalLink size={16} />
                 </motion.a>
                 <motion.a
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileHover={{ scale: 1.05, background: `${ACCENT_COLOR}25` }}
                   whileTap={{ scale: 0.95 }}
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-light hover:bg-white/20 transition-colors backdrop-blur-sm"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
+                  style={{
+                    background: 'rgba(255,255,255,0.05)',
+                    color: '#F5F5F5',
+                    border: `1px solid ${ACCENT_COLOR}25`,
+                  }}
                 >
-                  <FiGithub size={18} />
+                  <FiGithub size={16} />
                 </motion.a>
               </div>
 
+              {/* View Details Arrow */}
+              <div
+                className="flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0"
+                style={{ color: ACCENT_COLOR }}
+              >
+                <span>View Details</span>
+                <FiArrowRight />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Shine Effect */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.05) 50%, transparent 55%)",
-          }}
-        />
-
-        {/* Border Glow on Hover */}
-        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            boxShadow: `inset 0 0 30px ${project.color}40, 0 0 40px ${project.color}20`,
-          }}
+        {/* Bottom accent line */}
+        <motion.div
+          className="absolute bottom-0 left-0 h-[2px]"
+          style={{ background: `linear-gradient(90deg, ${ACCENT_COLOR}, transparent)` }}
+          initial={{ width: 0 }}
+          whileInView={{ width: '50%' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: index * 0.1 + 0.2 }}
         />
       </div>
     </motion.div>
@@ -249,19 +273,36 @@ export default function Projects() {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <section id="projects" className="section-padding relative overflow-hidden">
+    <section id="projects" className="py-20 md:py-28 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark via-secondary/15 to-dark" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#111111] to-[#0A0A0A]" />
       
-      {/* Decorative Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]"
+      {/* Subtle Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.015]"
         style={{
-          backgroundImage: `linear-gradient(#C9A55A 1px, transparent 1px), linear-gradient(90deg, #C9A55A 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
+          backgroundImage: `linear-gradient(${ACCENT_COLOR} 1px, transparent 1px), linear-gradient(90deg, ${ACCENT_COLOR} 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Decorative Glows */}
+      <div 
+        className="absolute top-1/4 left-[10%] w-72 h-72 rounded-full pointer-events-none"
+        style={{ 
+          background: `radial-gradient(circle, ${ACCENT_COLOR}06, transparent 70%)`,
+          filter: 'blur(80px)',
+        }}
+      />
+      <div 
+        className="absolute bottom-1/4 right-[10%] w-72 h-72 rounded-full pointer-events-none"
+        style={{ 
+          background: `radial-gradient(circle, ${ACCENT_COLOR}05, transparent 70%)`,
+          filter: 'blur(80px)',
         }}
       />
       
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           subtitle="My Work"
           title="Featured Projects"
@@ -273,44 +314,35 @@ export default function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
         >
           {categories.map((category, index) => (
             <motion.button
               key={category}
               onClick={() => setActiveCategory(category)}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className={`relative px-6 py-2.5 rounded-full font-medium transition-all duration-300 overflow-hidden ${
-                activeCategory === category
-                  ? 'text-secondary'
-                  : 'text-gray hover:text-light'
-              }`}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="relative px-5 py-2 rounded-full font-medium text-sm transition-all duration-300 overflow-hidden"
+              style={{
+                color: activeCategory === category ? '#0A0A0A' : `${ACCENT_COLOR}CC`,
+                background: activeCategory === category 
+                  ? `linear-gradient(135deg, ${ACCENT_COLOR}, ${ACCENT_COLOR}DD)` 
+                  : `${ACCENT_COLOR}08`,
+                border: activeCategory === category ? 'none' : `1px solid ${ACCENT_COLOR}20`,
+              }}
             >
-              {/* Active Background */}
-              {activeCategory === category && (
-                <motion.div
-                  layoutId="activeCategoryBg"
-                  className="absolute inset-0 bg-accent rounded-full"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              {/* Inactive Background */}
-              {activeCategory !== category && (
-                <div className="absolute inset-0 bg-secondary/50 rounded-full border border-primary-light/20" />
-              )}
-              <span className="relative z-10">{category}</span>
+              {category}
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Projects Grid Layout */}
+        {/* Projects Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => (
@@ -329,234 +361,255 @@ export default function Projects() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-14"
         >
           <motion.a
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.02 }}
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-accent/50 text-accent font-medium hover:bg-accent/10 transition-colors group"
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center gap-3 px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-300"
+            style={{
+              border: `1px solid ${ACCENT_COLOR}40`,
+              color: ACCENT_COLOR,
+              background: `${ACCENT_COLOR}08`,
+            }}
           >
             <span>View All Projects on GitHub</span>
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <FiArrowRight />
-            </motion.span>
+            <FiArrowRight />
           </motion.a>
         </motion.div>
       </div>
 
-      {/* Project Detail Modal - Shared Element Slide Transition */}
+      {/* Project Detail Modal - Full Screen */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 bg-dark/95 backdrop-blur-xl"
-            onClick={() => setSelectedProject(null)}
+            className="fixed inset-0 z-[100] overflow-hidden"
+            style={{ background: '#0A0A0A' }}
           >
+            {/* Full Screen Content */}
             <motion.div
-              layoutId={`project-card-${selectedProject.id}`}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-6xl h-[85vh] bg-secondary rounded-3xl overflow-hidden border border-primary-light/20 flex flex-col md:flex-row"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full flex flex-col lg:flex-row"
             >
+              {/* Back Button */}
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ x: -5 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-6 left-6 z-20 flex items-center gap-3 text-sm font-medium transition-colors"
+                style={{ color: ACCENT_COLOR }}
+              >
+                <div 
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{
+                    background: `${ACCENT_COLOR}15`,
+                    border: `1px solid ${ACCENT_COLOR}30`,
+                  }}
+                >
+                  <FiArrowLeft size={18} />
+                </div>
+                <span className="hidden sm:inline">Back to Projects</span>
+              </motion.button>
+
               {/* Navigation Arrows */}
-              <div className="absolute top-4 right-4 z-20 flex items-center gap-2">
+              <div className="absolute top-6 right-6 z-20 flex items-center gap-3">
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
                     const prevIndex = currentIndex > 0 ? currentIndex - 1 : projects.length - 1;
                     setSelectedProject(projects[prevIndex]);
                   }}
-                  className="w-10 h-10 rounded-full bg-dark/50 backdrop-blur-sm text-light hover:text-accent hover:bg-dark transition-colors flex items-center justify-center"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                  style={{ 
+                    background: `${ACCENT_COLOR}15`,
+                    color: ACCENT_COLOR,
+                    border: `1px solid ${ACCENT_COLOR}30`,
+                  }}
                 >
                   <FiChevronLeft size={20} />
                 </motion.button>
-                <span className="text-light/50 text-sm">/</span>
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     const currentIndex = projects.findIndex(p => p.id === selectedProject.id);
                     const nextIndex = currentIndex < projects.length - 1 ? currentIndex + 1 : 0;
                     setSelectedProject(projects[nextIndex]);
                   }}
-                  className="w-10 h-10 rounded-full bg-dark/50 backdrop-blur-sm text-light hover:text-accent hover:bg-dark transition-colors flex items-center justify-center"
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                  style={{ 
+                    background: `${ACCENT_COLOR}15`,
+                    color: ACCENT_COLOR,
+                    border: `1px solid ${ACCENT_COLOR}30`,
+                  }}
                 >
                   <FiChevronRight size={20} />
                 </motion.button>
               </div>
 
-              {/* Close Button */}
-              <motion.button
-                whileHover={{ scale: 1.1, rotate: 90 }}
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-4 left-4 z-20 w-10 h-10 rounded-full bg-accent text-secondary hover:bg-accent/90 transition-colors flex items-center justify-center shadow-lg"
-              >
-                <FiArrowLeft size={20} />
-              </motion.button>
-
-              {/* Left Side - Scrollable Screenshot Preview */}
-              <div className="relative w-full md:w-[55%] h-[40vh] md:h-full bg-dark/50 overflow-hidden">
-                {/* Gradient Overlay Top */}
-                <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-secondary/80 to-transparent z-10 pointer-events-none" />
+              {/* Left Side - Screenshot Preview */}
+              <div className="relative w-full lg:w-1/2 h-[40vh] lg:h-full bg-[#0A0A0A] flex items-center justify-center overflow-hidden">
+                {/* Decorative gradient */}
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse at center, ${ACCENT_COLOR}08 0%, transparent 70%)`,
+                  }}
+                />
                 
-                {/* Scrollable Image Container */}
-                <motion.div 
-                  className="h-full overflow-y-auto scrollbar-thin scrollbar-thumb-accent/30 scrollbar-track-transparent"
-                  initial={{ y: 0 }}
-                  animate={{ y: 0 }}
-                >
-                  <div className="relative w-full">
-                    {/* Project Screenshot - Long scrollable image */}
-                    <motion.img
+                <div className="relative w-full h-full p-8 pt-20 lg:p-16 flex items-center justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 }}
+                    className="relative w-full max-w-2xl rounded-xl overflow-hidden shadow-2xl"
+                    style={{
+                      boxShadow: `0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px ${ACCENT_COLOR}10`,
+                    }}
+                  >
+                    <Image
                       src={selectedProject.image}
                       alt={selectedProject.title}
-                      className="w-full h-auto object-cover object-top"
-                      initial={{ scale: 1.05 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                      style={{ minHeight: '150%' }}
+                      width={800}
+                      height={600}
+                      className="w-full h-auto object-cover"
                     />
-                    
-                    {/* Fallback gradient if no image */}
-                    <div 
-                      className="absolute inset-0 -z-10"
-                      style={{
-                        background: `linear-gradient(180deg, ${selectedProject.color} 0%, ${selectedProject.color}80 50%, #0A0A0A 100%)`,
-                      }}
-                    />
-                  </div>
-                </motion.div>
-
-                {/* Gradient Overlay Bottom */}
-                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-secondary to-transparent z-10 pointer-events-none" />
-
-                {/* Scroll Indicator */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1"
-                >
-                  <span className="text-light/40 text-xs uppercase tracking-wider">Scroll</span>
-                  <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="w-5 h-8 rounded-full border border-light/20 flex items-start justify-center p-1"
-                  >
-                    <motion.div className="w-1 h-2 bg-accent rounded-full" />
                   </motion.div>
-                </motion.div>
+                </div>
+
+                {/* Bottom gradient fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A] to-transparent lg:hidden" />
               </div>
 
               {/* Right Side - Project Details */}
-              <div className="w-full md:w-[45%] h-[60vh] md:h-full flex flex-col p-6 md:p-10 overflow-y-auto">
-                {/* Tech Stack Tags */}
-                <motion.div 
-                  className="flex flex-wrap gap-2 mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  {selectedProject.technologies.map((tech, i) => (
-                    <motion.span
-                      key={tech}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.15 + i * 0.05 }}
-                      className="text-accent text-sm font-medium"
+              <div className="w-full lg:w-1/2 h-[60vh] lg:h-full flex flex-col justify-center p-6 sm:p-10 lg:p-16 overflow-y-auto">
+                <div className="max-w-xl">
+                  {/* Tech Stack Tags */}
+                  <motion.div 
+                    className="flex flex-wrap gap-2 mb-6"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.15 }}
+                  >
+                    {selectedProject.technologies.map((tech, i) => (
+                      <motion.span
+                        key={tech}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 + i * 0.04 }}
+                        style={{ color: ACCENT_COLOR }}
+                        className="text-sm font-medium"
+                      >
+                        #{tech.replace(/\s+/g, '')}
+                      </motion.span>
+                    ))}
+                  </motion.div>
+
+                  {/* Project Title */}
+                  <motion.h2 
+                    className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-white mb-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {selectedProject.title}
+                  </motion.h2>
+                  
+                  {/* Project Description */}
+                  <motion.p 
+                    className="text-gray-400 text-base lg:text-lg leading-relaxed mb-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25 }}
+                  >
+                    {selectedProject.longDescription}
+                  </motion.p>
+
+                  {/* Category Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="mb-8"
+                  >
+                    <span 
+                      className="px-5 py-2 rounded-full text-sm font-medium"
+                      style={{
+                        background: `${ACCENT_COLOR}12`,
+                        color: ACCENT_COLOR,
+                        border: `1px solid ${ACCENT_COLOR}25`,
+                      }}
                     >
-                      #{tech.replace(/\s+/g, '')}
-                    </motion.span>
-                  ))}
-                </motion.div>
+                      {selectedProject.category}
+                    </span>
+                  </motion.div>
 
-                {/* Project Title */}
-                <motion.h3 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold font-heading text-light mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {selectedProject.title}
-                </motion.h3>
-                
-                {/* Project Description */}
-                <motion.p 
-                  className="text-gray text-base md:text-lg leading-relaxed mb-8 flex-grow"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  {selectedProject.longDescription}
-                </motion.p>
-
-                {/* Category Badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35 }}
-                  className="mb-8"
-                >
-                  <span className="px-4 py-2 rounded-full bg-white/5 border border-primary-light/20 text-light/70 text-sm font-medium">
-                    {selectedProject.category}
-                  </span>
-                </motion.div>
-
-                {/* Action Buttons */}
-                <motion.div 
-                  className="flex flex-col sm:flex-row gap-4 mt-auto"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <motion.a
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={selectedProject.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 px-8 py-4 bg-accent text-secondary font-bold rounded-xl hover:shadow-lg hover:shadow-accent/30 transition-all uppercase tracking-wider text-sm"
+                  {/* Action Buttons */}
+                  <motion.div 
+                    className="flex flex-col sm:flex-row gap-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.35 }}
                   >
-                    <span>Visit</span>
-                    <FiExternalLink size={18} />
-                  </motion.a>
-                  <motion.a
-                    whileHover={{ scale: 1.02, y: -2 }}
-                    whileTap={{ scale: 0.98 }}
-                    href={selectedProject.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 px-8 py-4 border border-primary-light/30 text-light font-semibold rounded-xl hover:bg-primary-light/10 transition-all"
-                  >
-                    <FiGithub size={20} />
-                    <span>Source Code</span>
-                  </motion.a>
-                </motion.div>
+                    <motion.a
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      href={selectedProject.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold"
+                      style={{
+                        background: `linear-gradient(135deg, ${ACCENT_COLOR}, ${ACCENT_COLOR}DD)`,
+                        color: '#0A0A0A',
+                      }}
+                    >
+                      <span>Visit Live</span>
+                      <FiExternalLink size={18} />
+                    </motion.a>
+                    <motion.a
+                      whileHover={{ scale: 1.02, background: `${ACCENT_COLOR}15` }}
+                      whileTap={{ scale: 0.98 }}
+                      href={selectedProject.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-medium transition-all"
+                      style={{
+                        border: `1px solid ${ACCENT_COLOR}30`,
+                        color: '#F5F5F5',
+                      }}
+                    >
+                      <FiGithub size={20} />
+                      <span>Source Code</span>
+                    </motion.a>
+                  </motion.div>
 
-                {/* Project Index Indicator */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="mt-8 pt-6 border-t border-primary-light/10"
-                >
-                  <span className="text-light/20 text-sm">
-                    Project {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
-                  </span>
-                </motion.div>
+                  {/* Project Index */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="mt-10 pt-6"
+                    style={{ borderTop: `1px solid ${ACCENT_COLOR}15` }}
+                  >
+                    <span style={{ color: `${ACCENT_COLOR}60` }} className="text-sm font-medium">
+                      Project {String(projects.findIndex(p => p.id === selectedProject.id) + 1).padStart(2, '0')} / {String(projects.length).padStart(2, '0')}
+                    </span>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           </motion.div>

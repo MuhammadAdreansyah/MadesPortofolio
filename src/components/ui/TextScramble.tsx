@@ -1,22 +1,30 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 interface TextScrambleProps {
   texts: string[];
   className?: string;
+  interval?: number; // Time between text changes in ms
+  speed?: number; // Animation speed (higher = slower)
 }
 
-const chars = '!<>-_\\/[]{}—=+*^?#________';
+const chars = '!<>-_\\/[]{}—=+*^?#@$%&~';
 
-export default function TextScramble({ texts, className = '' }: TextScrambleProps) {
+export default function TextScramble({ 
+  texts, 
+  className = '',
+  interval = 4000,
+  speed = 50,
+}: TextScrambleProps) {
   const [displayText, setDisplayText] = useState('');
-  const [, setCurrentIndex] = useState(0);
+  const currentIndexRef = useRef(0);
+  const frameRef = useRef<number | null>(null);
 
-  const scramble = useCallback((newText: string) => {
-    const length = Math.max(displayText.length, newText.length);
+  const scramble = useCallback((newText: string, oldText: string) => {
+    const length = Math.max(oldText.length, newText.length);
     let frame = 0;
-    const totalFrames = 30;
+    const totalFrames = speed;
     
     const animate = () => {
       let output = '';
@@ -27,13 +35,11 @@ export default function TextScramble({ texts, className = '' }: TextScrambleProp
         const charProgress = i / length;
         
         if (progress > charProgress) {
-          // Character is revealed
           if (i < newText.length) {
             output += newText[i];
           }
           complete++;
         } else {
-          // Still scrambling
           if (i < newText.length) {
             output += chars[Math.floor(Math.random() * chars.length)];
           }
@@ -44,33 +50,36 @@ export default function TextScramble({ texts, className = '' }: TextScrambleProp
       
       if (complete < length) {
         frame++;
-        requestAnimationFrame(animate);
+        frameRef.current = requestAnimationFrame(animate);
       } else {
         setDisplayText(newText);
       }
     };
     
     animate();
-  }, [displayText.length]);
+  }, [speed]);
 
   useEffect(() => {
     // Initial scramble
-    scramble(texts[0]);
+    scramble(texts[0], '');
     
     // Set up interval to cycle through texts
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => {
-        const next = (prev + 1) % texts.length;
-        scramble(texts[next]);
-        return next;
-      });
-    }, 3000);
+    const intervalId = setInterval(() => {
+      const prevText = texts[currentIndexRef.current];
+      currentIndexRef.current = (currentIndexRef.current + 1) % texts.length;
+      scramble(texts[currentIndexRef.current], prevText);
+    }, interval);
 
-    return () => clearInterval(interval);
-  }, [texts, scramble]);
+    return () => {
+      clearInterval(intervalId);
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [texts, scramble, interval]);
 
   return (
-    <span className={`font-mono ${className}`}>
+    <span className={className}>
       {displayText}
     </span>
   );

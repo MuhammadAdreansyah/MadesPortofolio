@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FiDownload, FiCheck, FiCode, FiCoffee, FiAward } from 'react-icons/fi';
+import { FiDownload, FiCheck } from 'react-icons/fi';
 import SectionTitle from './ui/SectionTitle';
 import Button from './ui/Button';
 
@@ -22,12 +22,7 @@ const journey = [
   { year: '2024', title: 'Senior Dev', desc: 'Team leadership' },
 ];
 
-// Quick stats
-const stats = [
-  { icon: FiCode, value: '50+', label: 'Projects' },
-  { icon: FiCoffee, value: '1000+', label: 'Commits' },
-  { icon: FiAward, value: '15+', label: 'Certifications' },
-];
+// Quick stats - removed for cleaner design
 
 export default function About() {
   return (
@@ -97,24 +92,6 @@ export default function About() {
                   <div className="text-2xl font-bold">5+</div>
                   <div className="text-xs font-medium opacity-80">Years Exp.</div>
                 </motion.div>
-              </div>
-              
-              {/* Quick Stats Grid */}
-              <div className="grid grid-cols-3 gap-3">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.1 * index }}
-                    className="p-4 rounded-xl bg-secondary/50 border border-accent/10 text-center hover:border-accent/30 transition-colors"
-                  >
-                    <stat.icon className="w-5 h-5 text-accent mx-auto mb-2" />
-                    <div className="text-xl font-bold text-light">{stat.value}</div>
-                    <div className="text-xs text-gray">{stat.label}</div>
-                  </motion.div>
-                ))}
               </div>
               
               {/* Philosophy Quote - Better visual separation with enhanced spacing */}

@@ -219,29 +219,6 @@ export default function Certificates() {
           />
         </div>
 
-        {/* Stats */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto px-4 mb-12"
-        >
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20">
-            {[
-              { value: certificates.length, label: 'Certificates', suffix: '+' },
-              { value: '5', label: 'Platforms', suffix: '+' },
-              { value: '2024', label: 'Latest', suffix: '' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-accent mb-2">
-                  {stat.value}<span className="text-accent/60">{stat.suffix}</span>
-                </div>
-                <div className="text-sm text-gray uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Navigation Arrows - Desktop */}
         <div className="hidden md:flex justify-end max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 gap-3">
           <motion.button
