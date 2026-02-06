@@ -243,7 +243,7 @@ function ProjectCard({ project, index, onSelect }: {
                 className="flex items-center gap-2 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0"
                 style={{ color: ACCENT_COLOR }}
               >
-                <span>View Details</span>
+                <span>Lihat Detail</span>
                 <FiArrowRight />
               </div>
             </div>
@@ -304,9 +304,9 @@ export default function Projects() {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
-          subtitle="My Work"
-          title="Featured Projects"
-          description="Explore my recent projects showcasing my skills and expertise in building modern web applications."
+          subtitle="Karya Saya"
+          title="Proyek Unggulan"
+          description="Jelajahi proyek terbaru saya yang menampilkan keahlian dalam membangun aplikasi web modern."
         />
 
         {/* Category Filter */}
@@ -376,7 +376,7 @@ export default function Projects() {
               background: `${ACCENT_COLOR}08`,
             }}
           >
-            <span>View All Projects on GitHub</span>
+            <span>Lihat Semua Proyek di GitHub</span>
             <FiArrowRight />
           </motion.a>
         </motion.div>
@@ -575,7 +575,7 @@ export default function Projects() {
                     className="flex items-center gap-2 text-sm text-gray-500 transition-colors"
                   >
                     <FiGithub size={16} />
-                    <span>Source Code</span>
+                    <span>Kode Sumber</span>
                   </motion.a>
 
                   {/* Project Index */}

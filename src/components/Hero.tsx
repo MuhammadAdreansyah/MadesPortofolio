@@ -63,7 +63,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-gray-400 text-lg mb-4"
         >
-          Hello, I&apos;m
+          Halo, Saya
         </motion.p>
 
         {/* Name */}
@@ -109,8 +109,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-gray-400 text-base sm:text-lg max-w-xl mx-auto leading-relaxed"
         >
-          Passionate about building scalable applications, designing efficient databases, 
-          and transforming data into actionable insights.
+          Bersemangat dalam membangun aplikasi yang skalabel, merancang basis data yang efisien, 
+          dan mengubah data menjadi wawasan yang dapat ditindaklanjuti.
         </motion.p>
       </div>
 

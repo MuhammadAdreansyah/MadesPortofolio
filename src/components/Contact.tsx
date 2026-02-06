@@ -21,7 +21,7 @@ export default function Contact() {
   const copyEmail = () => {
     navigator.clipboard.writeText(email);
     setCopied(true);
-    toast.success('Email copied to clipboard!', {
+    toast.success('Email berhasil disalin!', {
       duration: 2000,
       style: {
         background: '#202020',
@@ -36,19 +36,19 @@ export default function Contact() {
     const newErrors: Record<string, string> = {};
     
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = 'Nama wajib diisi';
     }
     
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email wajib diisi';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
+      newErrors.email = 'Format email tidak valid';
     }
     
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = 'Pesan wajib diisi';
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
+      newErrors.message = 'Pesan minimal 10 karakter';
     }
     
     setErrors(newErrors);
@@ -64,7 +64,7 @@ export default function Contact() {
     
     await new Promise(resolve => setTimeout(resolve, 2000));
     
-    toast.success('Message sent successfully! I\'ll get back to you soon.', {
+    toast.success('Pesan berhasil dikirim! Saya akan segera menghubungi Anda.', {
       duration: 5000,
       style: {
         background: '#202020',
@@ -104,11 +104,11 @@ export default function Contact() {
           viewport={{ once: false, amount: 0.2 }}
           className="mb-16"
         >
-          <p className="text-accent font-mono text-sm tracking-wider mb-4">{"// GET IN TOUCH"}</p>
+          <p className="text-accent font-mono text-sm tracking-wider mb-4">{"// HUBUNGI SAYA"}</p>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading text-light leading-tight">
-            Let&apos;s work together
+            Mari bekerja sama
             <br />
-            <span className="text-gray">on your next project</span>
+            <span className="text-gray">untuk proyek Anda</span>
           </h2>
         </motion.div>
 
@@ -129,8 +129,8 @@ export default function Contact() {
                   <FiMail className="text-accent" size={24} />
                 </div>
                 <div>
-                  <p className="text-gray text-sm">Drop me a line</p>
-                  <p className="text-light font-medium">Preferred contact</p>
+                  <p className="text-gray text-sm">Kirim pesan</p>
+                  <p className="text-light font-medium">Kontak utama</p>
                 </div>
               </div>
               
@@ -146,7 +146,7 @@ export default function Contact() {
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-colors"
                 >
                   {copied ? <FiCheck size={18} /> : <FiCopy size={18} />}
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copied ? 'Disalin!' : 'Salin'}
                 </motion.button>
                 
                 <motion.a
@@ -155,7 +155,7 @@ export default function Contact() {
                   whileTap={{ scale: 0.98 }}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-accent text-dark font-medium hover:bg-accent/90 transition-colors"
                 >
-                  Send Email
+                  Kirim Email
                   <FiArrowUpRight size={18} />
                 </motion.a>
               </div>
@@ -165,7 +165,7 @@ export default function Contact() {
             <div className="rounded-2xl overflow-hidden border border-accent/10">
               <div className="flex items-center gap-3 px-4 py-3 bg-secondary/30 border-b border-accent/10">
                 <FiMapPin className="text-accent" size={18} />
-                <span className="text-light text-sm font-medium">My Location</span>
+                <span className="text-light text-sm font-medium">Lokasi Saya</span>
               </div>
               <div className="relative h-48">
                 <iframe
@@ -184,7 +184,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="absolute bottom-3 right-3 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-dark/80 backdrop-blur-sm text-accent text-sm hover:bg-accent hover:text-dark transition-colors"
                 >
-                  Open in Maps
+                  Buka di Maps
                   <FiArrowUpRight size={14} />
                 </a>
               </div>
@@ -197,7 +197,7 @@ export default function Contact() {
                 <div className="absolute inset-0 w-3 h-3 rounded-full bg-green-500 animate-ping" />
               </div>
               <div>
-                <p className="text-light text-sm font-medium">Currently available</p>
+                <p className="text-light text-sm font-medium">Tersedia untuk bekerja</p>
                 <p className="text-gray text-xs">Medan, Indonesia · GMT+7</p>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <Input
-                    label="Your Name"
+                    label="Nama Anda"
                     name="name"
                     placeholder="John Doe"
                     value={formData.name}
@@ -232,7 +232,7 @@ export default function Contact() {
                     error={errors.name}
                   />
                   <Input
-                    label="Your Email"
+                    label="Email Anda"
                     name="email"
                     type="email"
                     placeholder="john@example.com"
@@ -243,9 +243,9 @@ export default function Contact() {
                 </div>
                 
                 <Textarea
-                  label="Your Message"
+                  label="Pesan Anda"
                   name="message"
-                  placeholder="Hi! I'd like to discuss a project..."
+                  placeholder="Halo! Saya ingin mendiskusikan sebuah proyek..."
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
@@ -254,7 +254,7 @@ export default function Contact() {
                 
                 <div className="flex items-center justify-between pt-2">
                   <p className="text-gray text-sm">
-                    I&apos;ll respond within 24 hours
+                    Saya akan merespons dalam 24 jam
                   </p>
                   
                   <motion.button
@@ -267,11 +267,11 @@ export default function Contact() {
                     {isLoading ? (
                       <>
                         <div className="w-5 h-5 border-2 border-dark/30 border-t-dark rounded-full animate-spin" />
-                        Sending...
+                        Mengirim...
                       </>
                     ) : (
                       <>
-                        Send Message
+                        Kirim Pesan
                         <FiSend size={18} />
                       </>
                     )}
@@ -288,7 +288,7 @@ export default function Contact() {
               transition={{ delay: 0.3 }}
               className="text-center text-gray text-sm mt-6"
             >
-              Prefer email? Just click the email above to start a conversation.
+              Lebih suka email? Cukup klik email di atas untuk memulai percakapan.
             </motion.p>
           </motion.div>
         </div>

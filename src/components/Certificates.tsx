@@ -135,14 +135,14 @@ function CertificateCard({ cert, index }: { cert: typeof certificates[0]; index:
           {/* Info Grid */}
           <div className="grid grid-cols-2 gap-4 mb-5">
             <div>
-              <div className="text-xs text-gray/60 uppercase tracking-wider mb-1">Issued</div>
+              <div className="text-xs text-gray/60 uppercase tracking-wider mb-1">Diterbitkan</div>
               <div className="text-light text-sm font-medium flex items-center gap-1.5">
                 <FiCalendar className="w-3.5 h-3.5 text-accent" />
                 {cert.date}
               </div>
             </div>
             <div>
-              <div className="text-xs text-gray/60 uppercase tracking-wider mb-1">Credential ID</div>
+              <div className="text-xs text-gray/60 uppercase tracking-wider mb-1">ID Kredensial</div>
               <div className="text-light text-sm font-medium font-mono truncate">
                 {cert.credentialId}
               </div>
@@ -159,7 +159,7 @@ function CertificateCard({ cert, index }: { cert: typeof certificates[0]; index:
             className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-accent/10 border border-accent/30 text-accent font-medium text-sm hover:bg-accent hover:text-dark transition-all duration-300"
           >
             <FiExternalLink className="w-4 h-4" />
-            <span>Verify Credential</span>
+            <span>Verifikasi Kredensial</span>
           </motion.a>
         </div>
         
@@ -213,9 +213,9 @@ export default function Certificates() {
         {/* Section Header */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
           <SectionTitle
-            subtitle="My Achievements"
-            title="Certificates & Credentials"
-            description="Professional certifications and courses I've completed to continuously improve my skills."
+            subtitle="Pencapaian Saya"
+            title="Sertifikat & Kredensial"
+            description="Sertifikasi profesional dan kursus yang telah saya selesaikan untuk terus meningkatkan keahlian."
           />
         </div>
 
@@ -278,7 +278,7 @@ export default function Certificates() {
           viewport={{ once: false, amount: 0.2 }}
           className="md:hidden text-center text-gray/50 text-sm mt-6"
         >
-          ← Swipe to explore →
+          ← Geser untuk menjelajahi →
         </motion.p>
         
         {/* Progress Indicator */}

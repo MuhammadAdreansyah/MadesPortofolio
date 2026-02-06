@@ -26,7 +26,7 @@ const skillCategories = [
   {
     id: 'frontend',
     title: 'Frontend',
-    subtitle: 'Building interfaces',
+    subtitle: 'Membangun antarmuka',
     icon: FiCode,
     skills: [
       { name: 'React', icon: SiReact, level: 95 },
@@ -41,7 +41,7 @@ const skillCategories = [
   {
     id: 'backend',
     title: 'Backend',
-    subtitle: 'Server & databases',
+    subtitle: 'Server & basis data',
     icon: FiServer,
     skills: [
       { name: 'Node.js', icon: SiNodedotjs, level: 88 },
@@ -55,7 +55,7 @@ const skillCategories = [
   {
     id: 'tools',
     title: 'Tools',
-    subtitle: 'Development workflow',
+    subtitle: 'Alur kerja pengembangan',
     icon: FiTool,
     skills: [
       { name: 'Git', icon: SiGit, level: 90 },
@@ -68,14 +68,14 @@ const skillCategories = [
   {
     id: 'soft',
     title: 'Soft Skills',
-    subtitle: 'Professional qualities',
+    subtitle: 'Kualitas profesional',
     icon: FiUsers,
     skills: [
-      { name: 'Problem Solving', emoji: '🧩', level: 95 },
-      { name: 'Team Work', emoji: '🤝', level: 90 },
-      { name: 'Communication', emoji: '💬', level: 88 },
-      { name: 'Time Management', emoji: '⏰', level: 85 },
-      { name: 'Leadership', emoji: '🎯', level: 82 },
+      { name: 'Pemecahan Masalah', emoji: '🧩', level: 95 },
+      { name: 'Kerja Tim', emoji: '🤝', level: 90 },
+      { name: 'Komunikasi', emoji: '💬', level: 88 },
+      { name: 'Manajemen Waktu', emoji: '⏰', level: 85 },
+      { name: 'Kepemimpinan', emoji: '🎯', level: 82 },
     ],
   },
 ];
@@ -733,9 +733,9 @@ export default function Skills() {
       
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
-          subtitle="My Skills"
-          title="Tech Constellation"
-          description="Explore my universe of technical skills. Each orbit represents a domain of expertise."
+          subtitle="Keahlian Saya"
+          title="Konstelasi Teknologi"
+          description="Jelajahi semesta keahlian teknis saya. Setiap orbit mewakili domain keahlian."
         />
 
         {/* Stats */}
@@ -746,9 +746,9 @@ export default function Skills() {
           className="flex flex-wrap justify-center gap-4 md:gap-8 mb-12 md:mb-16"
         >
           {[
-            { value: totalSkills, label: 'Technologies', suffix: '+' },
-            { value: skillCategories.length, label: 'Domains', suffix: '' },
-            { value: '5', label: 'Years', suffix: '+' },
+            { value: totalSkills, label: 'Teknologi', suffix: '+' },
+            { value: skillCategories.length, label: 'Domain', suffix: '' },
+            { value: '3', label: 'Tahun', suffix: '+' },
           ].map((stat, index) => (
             <motion.div 
               key={index} 
@@ -801,7 +801,7 @@ export default function Skills() {
           className="text-center mt-16 md:mt-20"
         >
           <p className="text-gray-400 mb-5 text-sm">
-            Constantly expanding my constellation with new technologies
+            Terus memperluas konstelasi dengan teknologi baru
           </p>
           
           <div className="flex flex-wrap justify-center gap-2">

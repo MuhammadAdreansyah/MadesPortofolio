@@ -8,18 +8,18 @@ import Button from './ui/Button';
 
 // Key highlights/values
 const highlights = [
-  'Clean & Maintainable Code',
-  'Modern Tech Stack',
-  'User-Centric Design',
-  'Performance Optimized',
+  'Kode Bersih & Mudah Dipelihara',
+  'Tech Stack Modern',
+  'Desain Berorientasi Pengguna',
+  'Performa Teroptimasi',
 ];
 
 // Journey milestones
 const journey = [
-  { year: '2019', title: 'Started Coding', desc: 'First line of code' },
-  { year: '2020', title: 'First Project', desc: 'Freelance work' },
-  { year: '2022', title: 'Full Stack', desc: 'Backend mastery' },
-  { year: '2024', title: 'Senior Dev', desc: 'Team leadership' },
+  { year: '2022', title: 'Admin Database', desc: 'Telkom Indonesia' },
+  { year: '2024', title: 'Magang Front Office', desc: 'KSOP Utama' },
+  { year: '2024', title: 'Analis Data', desc: 'RevoU' },
+  { year: '2025', title: 'Pengelola Data', desc: 'KSOP Belawan' },
 ];
 
 // Quick stats - removed for cleaner design
@@ -44,9 +44,9 @@ export default function About() {
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
-          subtitle="About Me"
-          title="Know Me More"
-          description="The story behind the code and the passion that drives every project."
+          subtitle="Tentang Saya"
+          title="Kenali Saya Lebih Dekat"
+          description="Kisah di balik kode dan semangat yang menggerakkan setiap proyek."
         />
 
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
@@ -77,7 +77,7 @@ export default function About() {
                   {/* Name Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <h3 className="text-2xl font-bold text-light mb-1">Madesmac</h3>
-                    <p className="text-accent font-medium">Full Stack Developer</p>
+                    <p className="text-accent font-medium">Analis Data & Pengembang</p>
                   </div>
                 </div>
                 
@@ -89,8 +89,8 @@ export default function About() {
                   transition={{ delay: 0.4, type: 'spring' }}
                   className="absolute -bottom-4 -right-4 md:right-4 bg-accent text-dark px-5 py-3 rounded-xl shadow-xl"
                 >
-                  <div className="text-2xl font-bold">5+</div>
-                  <div className="text-xs font-medium opacity-80">Years Exp.</div>
+                  <div className="text-2xl font-bold">3+</div>
+                  <div className="text-xs font-medium opacity-80">Tahun Exp.</div>
                 </motion.div>
               </div>
               
@@ -103,10 +103,10 @@ export default function About() {
                 className="mt-10 lg:mt-12 p-6 rounded-xl bg-gradient-to-br from-accent/10 via-accent/5 to-transparent border-l-4 border-accent backdrop-blur-sm"
               >
                 <p className="text-light/90 text-sm italic leading-relaxed">
-                  &quot;Code is poetry. Every function tells a story, every algorithm solves a puzzle, 
-                  and every pixel creates an experience.&quot;
+                  &quot;Kode adalah puisi. Setiap fungsi menceritakan kisah, setiap algoritma memecahkan teka-teki, 
+                  dan setiap piksel menciptakan pengalaman.&quot;
                 </p>
-                <p className="text-accent text-xs mt-4 font-medium tracking-wide">— My Development Philosophy</p>
+                <p className="text-accent text-xs mt-4 font-medium tracking-wide">— Filosofi Pengembangan Saya</p>
               </motion.div>
             </div>
           </motion.div>
@@ -122,27 +122,27 @@ export default function About() {
             {/* Introduction */}
             <div className="space-y-4">
               <h3 className="text-2xl md:text-3xl font-bold text-light">
-                Crafting Digital Experiences with
-                <span className="text-accent"> Passion & Precision</span>
+                Membangun Pengalaman Digital dengan
+                <span className="text-accent"> Passion & Presisi</span>
               </h3>
               
               <p className="text-gray leading-relaxed">
-                I&apos;m Muhammad Adreansyah P. Lubis, a Full Stack Developer with over 5 years 
-                of experience building web applications that users love. I specialize in 
-                transforming complex ideas into elegant, performant solutions.
+                Saya Muhammad Adreansyah P. Lubis, seorang Data Analyst dan Developer dengan pengalaman 
+                dalam membangun solusi berbasis data yang efektif. Saya mengkhususkan diri dalam 
+                mengubah ide kompleks menjadi solusi yang elegan dan berperforma tinggi.
               </p>
               
               <p className="text-gray leading-relaxed">
-                My approach combines technical expertise with creative problem-solving. 
-                I believe that great software should be intuitive, accessible, and 
-                delightful to use. Every line of code I write is aimed at creating 
-                meaningful impact.
+                Pendekatan saya menggabungkan keahlian teknis dengan pemecahan masalah yang kreatif. 
+                Saya percaya bahwa perangkat lunak yang hebat harus intuitif, dapat diakses, dan 
+                menyenangkan untuk digunakan. Setiap baris kode yang saya tulis ditujukan untuk menciptakan 
+                dampak yang bermakna.
               </p>
             </div>
             
             {/* What I Bring */}
             <div className="p-6 rounded-2xl bg-secondary/50 border border-accent/10">
-              <h4 className="text-lg font-semibold text-light mb-4">What I Bring to the Table</h4>
+              <h4 className="text-lg font-semibold text-light mb-4">Yang Saya Tawarkan</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {highlights.map((item, index) => (
                   <motion.div
@@ -164,7 +164,7 @@ export default function About() {
             
             {/* Journey Timeline - Enhanced spacing and visual hierarchy */}
             <div className="pt-8 mt-2 border-t border-accent/10">
-              <h4 className="text-lg font-semibold text-light mb-6">My Journey</h4>
+              <h4 className="text-lg font-semibold text-light mb-6">Perjalanan Saya</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {journey.map((item, index) => (
                   <motion.div
@@ -199,14 +199,14 @@ export default function About() {
               className="flex flex-wrap items-center justify-start gap-4 pt-8 mt-4 border-t border-accent/10"
             >
               <Button variant="accent" icon={<FiDownload />} className="min-w-[160px] justify-center">
-                Download CV
+                Unduh CV
               </Button>
               <Button 
                 variant="outline" 
                 className="min-w-[140px] justify-center"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Let&apos;s Talk
+                Hubungi Saya
               </Button>
             </motion.div>
           </motion.div>

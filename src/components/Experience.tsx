@@ -10,71 +10,67 @@ const ACCENT_COLOR = '#C9A55A';
 const experiences = [
   {
     id: 1,
-    role: 'Senior Full Stack Developer',
-    company: 'Tech Corp Inc.',
-    location: 'Jakarta, Indonesia',
-    duration: 'Jan 2023 - Present',
-    year: '2023',
-    type: 'Full-time',
-    description: 'Leading development of enterprise web applications using React and Node.js.',
+    role: 'Pengelola Data dan Informasi',
+    company: 'Kantor Kesyahbandaran dan Otoritas Pelabuhan (KSOP) Utama Belawan',
+    location: 'Medan Belawan, Indonesia',
+    duration: 'Nov 2025 - Sekarang',
+    year: '2025',
+    type: 'Aktif',
+    description: 'Mengelola dan menganalisis data terkait LK3 dan Inaportnet untuk mendukung operasional pelabuhan.',
     responsibilities: [
-      'Lead a team of 5 developers in building scalable web applications',
-      'Architected microservices infrastructure reducing response time by 40%',
-      'Implemented CI/CD pipelines improving deployment efficiency',
-      'Mentored junior developers and conducted code reviews',
+      'Mengelola dan menganalisis data Lingkungan, Kesehatan, dan Keselamatan Kerja (LK3) untuk memastikan kepatuhan regulasi maritim',
+      'Mengoperasikan dan memelihara sistem Inaportnet untuk pemantauan aktivitas pelabuhan secara real-time',
+      'Mengembangkan automasi pengolahan data dan visualisasi laporan menggunakan Python dan Excel untuk meningkatkan efisiensi pelaporan',
     ],
-    technologies: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'AWS'],
+    technologies: ['Python', 'Excel', 'Inaportnet', 'LK3', 'Data Management'],
   },
   {
     id: 2,
-    role: 'Full Stack Developer',
-    company: 'Digital Solutions Ltd.',
-    location: 'Bandung, Indonesia',
-    duration: 'Jun 2021 - Dec 2022',
-    year: '2021',
-    type: 'Full-time',
-    description: 'Developed and maintained multiple client projects and internal tools.',
+    role: 'Magang Analis Data',
+    company: 'PT Revolusi Cita Edukasi (RevoU)',
+    location: 'Jakarta, Indonesia',
+    duration: 'Agu 2024 - Des 2024',
+    year: '2024',
+    type: 'Magang',
+    description: 'Menganalisis dan memvisualisasikan data untuk mendukung pengambilan keputusan berbasis data.',
     responsibilities: [
-      'Built 10+ client websites and web applications from scratch',
-      'Integrated third-party APIs and payment gateways',
-      'Optimized application performance and database queries',
-      'Collaborated with designers to implement pixel-perfect UIs',
+      'Melakukan pembersihan data, pra-pemrosesan, dan Analisis Data Eksploratif (EDA) menggunakan spreadsheet dan Python untuk memastikan kualitas data',
+      'Membangun dasbor dan visualisasi data menggunakan Google Data Studio/Microsoft Power BI untuk mendukung pengambilan keputusan berbasis data',
+      'Menyelesaikan capstone project dengan menganalisis kumpulan data bisnis dan menyajikan wawasan (insight) yang dapat ditindaklanjuti',
     ],
-    technologies: ['Vue.js', 'Laravel', 'MySQL', 'Docker'],
+    technologies: ['Python', 'Google Data Studio', 'Power BI', 'Spreadsheet', 'EDA'],
   },
   {
     id: 3,
-    role: 'Frontend Developer',
-    company: 'StartUp Hub',
-    location: 'Remote',
-    duration: 'Jan 2020 - May 2021',
-    year: '2020',
-    type: 'Full-time',
-    description: 'Focused on building responsive and interactive user interfaces.',
+    role: 'Magang Front Office',
+    company: 'Kantor Kesyahbandaran dan Otoritas Pelabuhan (KSOP) Utama',
+    location: 'Medan Belawan, Indonesia',
+    duration: 'Feb 2024 - Apr 2024',
+    year: '2024',
+    type: 'Magang',
+    description: 'Mengelola administrasi pelayanan maritim dan bertindak sebagai titik kontak utama di Pusat Pelayanan Satu Pintu.',
     responsibilities: [
-      'Developed responsive web interfaces using React and TypeScript',
-      'Implemented state management solutions with Redux',
-      'Created reusable component libraries',
-      'Participated in agile development processes',
+      'Mengelola administrasi pembuatan, perpanjangan, dan penggantian Buku Pelaut, memastikan validitas data pemohon serta mempercepat alur distribusi dokumen kepada pelaut',
+      'Melakukan verifikasi kelengkapan dokumen agen pelayaran terkait Perjanjian Kerja Laut (PKL), Masa Layar, Sertifikat Kapal, dan Izin Bersandar/Berlabuh',
+      'Bertindak sebagai titik kontak utama di Pusat Pelayanan Satu Pintu (PPSP), memberikan solusi informatif bagi agen dan pengguna jasa, serta meminimalisir kesalahan administrasi pada tahap awal pengajuan berkas',
     ],
-    technologies: ['React', 'TypeScript', 'Redux', 'Sass'],
+    technologies: ['Administrasi', 'Layanan Pelanggan', 'Verifikasi Dokumen', 'Manajemen Data'],
   },
   {
     id: 4,
-    role: 'Junior Web Developer',
-    company: 'Creative Agency',
-    location: 'Jakarta, Indonesia',
-    duration: 'Jun 2019 - Dec 2019',
-    year: '2019',
-    type: 'Internship',
-    description: 'Started my professional journey building websites for various clients.',
+    role: 'Administrator Basis Data Kontrak',
+    company: 'Telkom Indonesia',
+    location: 'Medan, Indonesia',
+    duration: 'Feb 2022 - Jan 2023',
+    year: '2022',
+    type: 'Kontrak',
+    description: 'Mengelola dan mengoptimalkan sistem basis data untuk meningkatkan efisiensi operasional.',
     responsibilities: [
-      'Assisted in developing WordPress websites',
-      'Learned modern JavaScript frameworks',
-      'Participated in client meetings and requirements gathering',
-      'Fixed bugs and performed website maintenance',
+      'Meningkatkan alur kerja integrasi data dengan mengoptimalkan proses ETL, guna memastikan efisiensi dan keandalan yang lebih tinggi',
+      'Memperkuat keamanan basis data SQL melalui penerapan langkah-langkah mitigasi risiko dan kontrol integritas data',
+      'Mendukung aktivitas migrasi basis data untuk memastikan transisi yang lancar dan meminimalkan downtime',
     ],
-    technologies: ['HTML', 'CSS', 'JavaScript', 'WordPress'],
+    technologies: ['SQL', 'ETL', 'Database Security', 'Data Migration', 'Data Integration'],
   },
 ];
 
@@ -118,7 +114,7 @@ function ExperienceCard({
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="w-full md:w-1/2"
+        className={`w-full md:w-1/2 ${isEven ? 'md:pl-8' : 'md:pr-8'}`}
       >
         {/* Mobile Year Badge */}
         <div className="md:hidden flex items-center gap-3 mb-3">
@@ -157,34 +153,32 @@ function ExperienceCard({
             <div className="relative">
               {/* Top Row */}
               <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <h3 
-                      className="text-lg font-bold transition-colors duration-300"
-                      style={{ color: isActive ? ACCENT_COLOR : '#F5F5F5' }}
-                    >
-                      {exp.role}
-                    </h3>
-                    {/* Year Badge - Now inline */}
-                    <span 
-                      className="hidden md:inline-block px-2 py-0.5 text-[11px] font-bold rounded"
-                      style={{ 
-                        background: `${ACCENT_COLOR}15`,
-                        color: ACCENT_COLOR,
-                      }}
-                    >
-                      {exp.year}
-                    </span>
-                  </div>
+                <div className="flex-1 min-w-0">
+                  <h3 
+                    className="text-lg font-bold transition-colors duration-300 mb-1"
+                    style={{ color: isActive ? ACCENT_COLOR : '#F5F5F5' }}
+                  >
+                    {exp.role}
+                  </h3>
                   <div className="flex items-center gap-2 text-sm" style={{ color: ACCENT_COLOR }}>
-                    <FiBriefcase size={14} />
-                    <span className="font-medium">{exp.company}</span>
+                    <FiBriefcase size={14} className="flex-shrink-0" />
+                    <span className="font-medium truncate">{exp.company}</span>
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {/* Year Badge - Desktop */}
                   <span 
-                    className="px-2.5 py-1 text-[11px] font-semibold rounded-full"
+                    className="hidden md:inline-block px-2 py-0.5 text-[11px] font-bold rounded"
+                    style={{ 
+                      background: `${ACCENT_COLOR}15`,
+                      color: ACCENT_COLOR,
+                    }}
+                  >
+                    {exp.year}
+                  </span>
+                  <span 
+                    className="px-2.5 py-1 text-[11px] font-semibold rounded-full whitespace-nowrap"
                     style={{ 
                       background: `${ACCENT_COLOR}15`,
                       color: ACCENT_COLOR,
@@ -327,9 +321,9 @@ export default function Experience() {
       
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
-          subtitle="My Journey"
-          title="Work Experience"
-          description="A timeline of my professional career and the companies I've had the pleasure to work with."
+          subtitle="Perjalanan Saya"
+          title="Pengalaman Kerja"
+          description="Timeline karier profesional saya dan perusahaan-perusahaan yang pernah saya kerjakan."
         />
 
         {/* Timeline Container */}
@@ -373,7 +367,7 @@ export default function Experience() {
               className="text-xs font-medium tracking-wider uppercase"
               style={{ color: `${ACCENT_COLOR}80` }}
             >
-              The Beginning
+              Awal Perjalanan
             </span>
           </motion.div>
         </div>

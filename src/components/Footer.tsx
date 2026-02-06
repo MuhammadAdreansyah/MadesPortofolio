@@ -71,7 +71,7 @@ export default function Footer() {
                 <span className="text-accent">mac</span>
               </a>
               <p className="text-gray text-sm max-w-xs">
-                Full Stack Developer crafting digital experiences with passion and precision.
+                Data Analyst & Developer yang membangun pengalaman digital dengan passion dan presisi.
               </p>
             </div>
             
@@ -98,7 +98,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
             {/* Navigation */}
             <div>
-              <h4 className="text-accent text-sm font-semibold uppercase tracking-wider mb-6">Navigation</h4>
+              <h4 className="text-accent text-sm font-semibold uppercase tracking-wider mb-6">Navigasi</h4>
               <div className="grid grid-cols-2 gap-x-8 gap-y-3">
                 {navLinks.map((link) => (
                   <a
@@ -119,7 +119,7 @@ export default function Footer() {
             
             {/* Contact Info */}
             <div>
-              <h4 className="text-accent text-sm font-semibold uppercase tracking-wider mb-6">Contact</h4>
+              <h4 className="text-accent text-sm font-semibold uppercase tracking-wider mb-6">Kontak</h4>
               <div className="space-y-4">
                 <a 
                   href="mailto:adreansyahlubis@gmail.com"
@@ -145,10 +145,10 @@ export default function Footer() {
               <div className="p-4 rounded-xl bg-accent/5 border border-accent/20">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
-                  <span className="text-light font-medium">Available for Work</span>
+                  <span className="text-light font-medium">Tersedia untuk Bekerja</span>
                 </div>
                 <p className="text-gray text-sm">
-                  Open for freelance projects and full-time opportunities.
+                  Terbuka untuk proyek freelance dan peluang full-time.
                 </p>
               </div>
             </div>
@@ -159,10 +159,10 @@ export default function Footer() {
         <div className="py-6 border-t border-accent/10">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-gray/60 text-sm">
-              © {new Date().getFullYear()} Madesmac. All rights reserved.
+              © {new Date().getFullYear()} Madesmac. Hak cipta dilindungi.
             </p>
             <p className="text-gray/60 text-sm">
-              Designed & Built with <span className="text-accent">♥</span>
+              Dirancang & Dibangun dengan <span className="text-accent">♥</span>
             </p>
           </div>
         </div>
